@@ -1,4 +1,5 @@
 import { supabase } from "@/supabase/config";
+import Image from "next/image";
 export default function GoogleOauth({ callback_url }) {
   if (!callback_url) callback_url = window.location.href;
   async function handleGoogleOauth() {
@@ -18,8 +19,8 @@ export default function GoogleOauth({ callback_url }) {
       onClick={handleGoogleOauth}
       className="flex items-center gap-2 p-1 text-black bg-white border border-gray-300 rounded-md"
     >
-      <img
-        src="./google.jpg"
+      <Image
+        src="/google.jpg"
         alt="google"
         width={40}
         height={40}

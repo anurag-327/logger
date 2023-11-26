@@ -1,4 +1,5 @@
 import { supabase } from "@/supabase/config";
+import Image from "next/image";
 export default function GithubOauth({ callback_url }) {
   if (!callback_url) callback_url = window.location.href;
   async function handleGithubOauth() {
@@ -19,8 +20,8 @@ export default function GithubOauth({ callback_url }) {
       onClick={handleGithubOauth}
       className="flex items-center gap-2 p-1 text-white bg-black border border-gray-300 rounded-md"
     >
-      <img
-        src="./github.png"
+      <Image
+        src="/github.png"
         alt="google"
         width={38}
         height={38}

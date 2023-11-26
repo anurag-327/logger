@@ -8,7 +8,6 @@ import GithubOauth from "@/components/Auth/GithubOauth";
 import { useStore } from "@/store/useStore";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { logging } from "@/next.config";
 export default function Login() {
   const searchParams = useSearchParams();
   const callback_url = searchParams.get("callback_url");
@@ -78,7 +77,6 @@ export default function Login() {
         </div>
         <div className="flex flex-col gap-3 mt-4 oAuthContainer">
           <GoogleOauth />
-          {/* <GitlabOauth /> */}
           <GithubOauth />
         </div>
         <div className="flex items-center justify-center gap-2 separator">

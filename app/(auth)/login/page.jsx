@@ -8,11 +8,10 @@ import GithubOauth from "@/components/Auth/GithubOauth";
 import { useStore } from "@/store/useStore";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { logging } from "@/next.config";
 export default function Login() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callback_url = searchParams.get("callback_url");
+  const callback_url = searchParams.get("callback_url") || null;
   const [toggleEye, setToggleEye] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -40,7 +39,7 @@ export default function Login() {
         setUser(data.user);
         setLoading(false);
         if (callback_url) router.push(callback_url);
-        else router.push("/");
+        else router.push("/projects");
       }
     } catch (err) {
       setLoading(false);
@@ -50,7 +49,7 @@ export default function Login() {
   useEffect(() => {
     if (user != null) {
       if (callback_url) router.push(callback_url);
-      else router.push("/");
+      else router.push("/projects");
     }
   }, []);
   return (
@@ -134,7 +133,7 @@ export default function Login() {
               disabled={loading}
               className={`w-full  text-white bg-blue-600 p-2 rounded-md`}
             >
-              {!logging ? "Continue" : "Logging In"}
+              {!loading ? "Continue" : "Logging In"}
             </button>
           </div>
           <div className="mt-5 text-sm text-center ">

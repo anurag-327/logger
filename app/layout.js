@@ -1,5 +1,5 @@
 "use client";
-import Loader from "@/components/UI/loader";
+import Loader from "@/components/UI/Loader";
 import "./globals.css";
 import { Inter, Poppins, Montserrat } from "next/font/google";
 import { useStore } from "@/store/useStore";

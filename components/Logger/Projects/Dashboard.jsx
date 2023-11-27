@@ -18,7 +18,7 @@ const Dashboard = ({ setOverlay, error, loading }) => {
             </div>
           </div>
         </div>
-      ) : projects ? (
+      ) : projects.length > 0 ? (
         <div>
           <Projects error={error} loading={loading} />
         </div>
@@ -35,7 +35,7 @@ const Dashboard = ({ setOverlay, error, loading }) => {
           />
           <button
             onClick={() => setOverlay(true)}
-            className="px-3 py-2 text-white bg-black rounded-md h-fit"
+            className="px-3 py-2 text-sm text-white bg-black rounded-md h-fit"
           >
             Create new Project
           </button>

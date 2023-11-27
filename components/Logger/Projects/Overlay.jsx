@@ -1,18 +1,43 @@
 import { useState } from "react";
 import { Socicons } from "socicons";
 import { useForm } from "react-hook-form";
-import { XCircle } from "phosphor-react";
+import { Warning, XCircle } from "phosphor-react";
+import { supabase } from "@/supabase/config";
+import { useStore } from "@/store/useStore";
+import { useRouter } from "next/navigation";
 const Overlay = ({ setOverlay }) => {
+  const router = useRouter();
+  const { user, addProject } = useStore();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = async (data) => {
-    // setLoading(true);
-    alert(JSON.stringify(data));
+  const onSubmit = async (value) => {
+    setLoading(true);
+    let { data, error } = await supabase
+      .from("projects")
+      .insert({
+        user_id: user.id,
+        name: value.name,
+        description: value.description,
+        metadata: { projectURL: value.projectURL },
+        projectURL: value.projectURL,
+      })
+      .select();
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+      console.log(error);
+    } else {
+      addProject(data[0]);
+      setLoading(false);
+      // setOverlay(false);
+      router.push(`/project/${data[0].id}`);
+    }
   };
   return (
     <div className="absolute z-50 flex items-center justify-center w-full min-h-screen bg-gray-100 overlay bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
@@ -80,6 +105,12 @@ const Overlay = ({ setOverlay }) => {
                 name="description"
               />
             </div>
+            {error && (
+              <div className="flex items-center justify-center gap-2 mt-4 text-sm text-center text-red-800 ">
+                <Warning size={20} color="#7da239" weight="bold" />
+                {error}
+              </div>
+            )}
             <div className="mt-4">
               <button
                 disabled={loading}
@@ -87,7 +118,7 @@ const Overlay = ({ setOverlay }) => {
                 bg-black text-white  rounded-md`}
                 type="Submit"
               >
-                {loading ? "creating" : "create"}
+                {loading ? "creating..." : "create"}
               </button>
             </div>
           </form>

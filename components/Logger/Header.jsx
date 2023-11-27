@@ -1,6 +1,12 @@
 import { useStore } from "@/store/useStore";
 import Image from "next/image";
-import { CaretUp, Gear, Question, SignOut } from "phosphor-react";
+import {
+  CaretUp,
+  CirclesThreePlus,
+  Gear,
+  Question,
+  SignOut,
+} from "phosphor-react";
 import { useState } from "react";
 import { supabase } from "@/supabase/config";
 import { useRouter } from "next/navigation";
@@ -15,8 +21,6 @@ const Header = () => {
       router.push("/");
     }
   }
-
-  console.log(user);
   const [dropDown, setDropDown] = useState(false);
 
   return (
@@ -24,7 +28,7 @@ const Header = () => {
       <div>
         <h3 className="text-xl font-extrabold ">
           logger
-          <span className="font-normal ">
+          <span className="text-sm font-normal sm:text-base">
             {" "}
             / {user.user_metadata.full_name}
           </span>
@@ -61,11 +65,16 @@ const Header = () => {
             </div>
             {/* <hr className="w-full h-[1.5px] mt-4 bg-black rounded-full "></hr> */}
             <div className="flex flex-col gap-3">
-              <a href="/" className="flex items-center gap-1 mt-4">
+              <a href="/settings" className="flex items-center gap-1 mt-4">
                 <Gear size={18} weight="regular" />
                 Setting
               </a>
-              <a href="/" className="flex items-center gap-1">
+
+              <a href="/projects" className="flex items-center gap-1">
+                <CirclesThreePlus size={18} />
+                Projects
+              </a>
+              <a href="/help" className="flex items-center gap-1">
                 <Question size={18} weight="regular" />
                 Help
               </a>

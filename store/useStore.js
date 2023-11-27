@@ -5,7 +5,7 @@ export const useStore = create((set) => ({
   setUser: (item) => set((state) => ({ user: item })),
   resetUser: () => set((state) => ({ user: null })),
   projects: [],
-  addProjects: (item) =>
+  addProject: (item) =>
     set((state) => ({ projects: [item, ...state.projects] })),
   setProjects: (project) => set((state) => ({ projects: project })),
   deleteProject: (id) =>

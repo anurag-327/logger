@@ -5,14 +5,32 @@ import { useRouter } from "next/navigation";
 import Overlay from "@/components/Logger/Projects/Overlay";
 import Header from "@/components/Logger/Projects/Header";
 import Dashboard from "@/components/Logger/Projects/Dashboard";
+import { supabase } from "@/supabase/config";
 
 const page = () => {
   const router = useRouter();
-  const { user } = useStore();
+  const { user, setProjects } = useStore();
   const [overlay, setOverlay] = useState(false);
-  console.log(user);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (user == null) router.push("/");
+    (async function () {
+      if (user != null) {
+        const { data, error } = await supabase
+          .from("projects")
+          .select()
+          .order("updated_at", { ascending: true })
+          .eq("user_id", user.id);
+        if (error) {
+          setError(true);
+        } else {
+          if (data) {
+            setProjects(data);
+          }
+        }
+      }
+    })();
   }, [user]);
   return (
     <>
@@ -21,7 +39,7 @@ const page = () => {
       ) : (
         <div className="w-full">
           <Header setOverlay={setOverlay} />
-          <Dashboard setOverlay={setOverlay} />
+          <Dashboard error={error} setOverlay={setOverlay} />
         </div>
       )}
     </>

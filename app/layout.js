@@ -3,11 +3,12 @@ import Loader from "@/components/UI/Loader";
 import "./globals.css";
 import { Inter, Poppins, Montserrat } from "next/font/google";
 import { useStore } from "@/store/useStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Router from "next/router";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/supabase/config";
 import { useSearchParams } from "next/navigation";
+import { Globe } from "phosphor-react";
 const font = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500"],
@@ -16,6 +17,7 @@ const font = Poppins({
 export default function RootLayout({ children }) {
   const { user, setUser, globalLoading, setGlobalLoading, setProjects } =
     useStore();
+  const [error, setError] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const callback_url = searchParams.get("callback_url") || null;
@@ -24,13 +26,6 @@ export default function RootLayout({ children }) {
       (async function () {
         const loggedinUser = await supabase.auth.getUser();
         setUser(loggedinUser.data.user);
-        if (loggedinUser.data.user) {
-          const { data, error } = await supabase
-            .from("projects")
-            .select()
-            .order("updated_at", { ascending: true });
-          if (data) setProjects(data);
-        }
       })();
       setGlobalLoading(false);
     } catch (error) {
@@ -52,7 +47,26 @@ export default function RootLayout({ children }) {
           " bg-gradient-to-r from-blue-50 to-blue-100  via-orange-50"
         }
       >
-        {globalLoading ? <Loader /> : children}
+        {globalLoading ? (
+          <Loader />
+        ) : error ? (
+          <div className="flex flex-col items-center justify-center w-full min-h-screen">
+            <div className="flex flex-col items-center gap-6 px-4 text-center">
+              <Globe size={80} weight="light" color="#000000" />
+              <span className="font-[500] text-xl">
+                You aren't connected to a working internet connection
+              </span>
+              <a
+                href="/"
+                className="px-2 py-1 border border-green-600 rounded-md"
+              >
+                Refresh
+              </a>
+            </div>
+          </div>
+        ) : (
+          children
+        )}
       </body>
     </html>
   );

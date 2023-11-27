@@ -57,7 +57,7 @@ export default function Login() {
       <div
         className={`p-4 ${
           loading && "pointer-events-none opacity-60"
-        } bg-white w-[90%] max-w-[400px] text-black dark:bg-black dark:shadow-lg dark:shadow-gray-100 dark:border flex flex-col gap-4 md:w-[400px] shadow-md rounded-2xl`}
+        } bg-white w-[90%] max-w-[400px] text-black  flex flex-col gap-4 md:w-[400px] shadow-md rounded-2xl`}
       >
         <header>
           <h2 className="text-2xl font-semibold text-center">

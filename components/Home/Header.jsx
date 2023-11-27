@@ -14,7 +14,7 @@ const Header = () => {
   }
 
   return (
-    <nav className="fixed top-0 flex justify-between w-full p-2 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+    <nav className="fixed top-0 flex justify-between w-full px-2 py-3 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
       <div>
         <h3 className="text-2xl font-extrabold">dub</h3>
       </div>
@@ -22,15 +22,15 @@ const Header = () => {
         {user ? (
           <button onClick={handleSignOut}>Signout</button>
         ) : (
-          <div className="gap-2 sm:flex">
+          <div className="flex gap-4">
             <a
-              className="px-4 py-1 text-white rounded-full bg-zinc-800"
+              className="px-3 py-1 transition duration-200 border border-green-400 rounded-full hover:border-green-600"
               href="/login"
             >
               Login
             </a>
             <a
-              className="px-3 py-1 transition duration-200 border border-green-400 rounded-full hover:border-green-600"
+              className="px-4 py-1 text-white bg-black rounded-full"
               href="/signup"
             >
               Signup

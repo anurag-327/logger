@@ -26,7 +26,7 @@ const Home = () => {
             insights without intrusion.
           </p>
         </div>
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             className="flex items-center justify-center gap-2 px-4 py-1 text-sm text-white bg-black rounded-full w-fit"
             href={user ? "/projects" : "/login"}

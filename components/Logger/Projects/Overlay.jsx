@@ -21,7 +21,6 @@ const Overlay = ({ setOverlay }) => {
     let { data, error } = await supabase
       .from("projects")
       .insert({
-        user_id: user.id,
         name: value.name,
         description: value.description,
         metadata: { projectURL: value.projectURL },

@@ -12,7 +12,7 @@ const page = () => {
   const { user, setProjects } = useStore();
   const [overlay, setOverlay] = useState(false);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (user == null) router.push("/");
     (async function () {
@@ -23,8 +23,10 @@ const page = () => {
           .order("updated_at", { ascending: true })
           .eq("user_id", user.id);
         if (error) {
+          setLoading(false);
           setError(true);
         } else {
+          setLoading(false);
           if (data) {
             setProjects(data);
           }
@@ -39,7 +41,7 @@ const page = () => {
       ) : (
         <div className="w-full">
           <Header setOverlay={setOverlay} />
-          <Dashboard error={error} setOverlay={setOverlay} />
+          <Dashboard error={error} loading={loading} setOverlay={setOverlay} />
         </div>
       )}
     </>

@@ -22,6 +22,13 @@ export default function RootLayout({ children }) {
   const searchParams = useSearchParams();
   const callback_url = searchParams.get("callback_url") || null;
   useEffect(() => {
+    // if (window.navigator.onLine == false) {
+    //   console.log("offline");
+    //   setError(true);
+    // } else {
+    //   console.log("online");
+    //   setError(false);
+    // }
     try {
       (async function () {
         const loggedinUser = await supabase.auth.getUser();

@@ -17,8 +17,8 @@ const Dashboard = ({ setOverlay }) => {
           <Image
             src="/illustration.jpg"
             alt="no projects"
-            width={350}
-            height={350}
+            width={300}
+            height={300}
           />
           <button
             onClick={() => setOverlay(true)}

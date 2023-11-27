@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <nav className="fixed top-0 flex justify-between w-full px-2 py-3 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
       <div>
-        <h3 className="text-2xl font-extrabold">dub</h3>
+        <h3 className="text-2xl font-extrabold">logger</h3>
       </div>
       <div>
         {user ? (

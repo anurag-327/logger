@@ -1,5 +1,4 @@
 import { Globe, Link, LinkSimpleHorizontal } from "phosphor-react";
-import React from "react";
 
 const Card = ({ project }) => {
   return (

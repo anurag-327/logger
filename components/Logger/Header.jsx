@@ -4,6 +4,7 @@ import {
   CaretUp,
   CirclesThreePlus,
   Gear,
+  House,
   Question,
   SignOut,
 } from "phosphor-react";
@@ -74,10 +75,15 @@ const Header = () => {
                 <CirclesThreePlus size={18} />
                 Projects
               </a>
+              <a href="/" className="flex items-center gap-1">
+                <House size={18} weight="regular" />
+                Home
+              </a>
               <a href="/help" className="flex items-center gap-1">
                 <Question size={18} weight="regular" />
                 Help
               </a>
+
               <button
                 onClick={handleSignOut}
                 className="flex items-center gap-1"

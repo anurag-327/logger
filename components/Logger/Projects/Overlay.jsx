@@ -40,7 +40,7 @@ const Overlay = ({ setOverlay }) => {
   };
   return (
     <div className="absolute z-50 flex items-center justify-center w-full min-h-screen bg-gray-100 overlay bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-      <div className=" relative w-full bg-white h-fit rounded-2xl shadow-md border sm:w-[400px] ">
+      <div className=" relative w-[98%] bg-white h-fit rounded-2xl shadow-md border sm:w-[400px] ">
         <div className="flex flex-col items-center justify-between w-full pt-4 ">
           <Socicons icon="github" size={50} />
           <h2 className="font-[500] text-lg mt-2">Create a new project</h2>

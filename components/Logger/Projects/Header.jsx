@@ -6,7 +6,7 @@ const Header = ({ setOverlay }) => {
       <h3 className="text-lg font-bold sm:text-2xl">My Projects</h3>
       <button
         onClick={() => setOverlay(true)}
-        className="px-3 py-2 text-sm text-white bg-black border border-gray-400 rounded-md sm:text-black sm:bg-white w-fi bg- sm:text-base h-fit"
+        className="px-3 py-2 text-sm text-white bg-black border border-gray-400 rounded-md bg- sm:text-base h-fit"
       >
         Add Project
       </button>

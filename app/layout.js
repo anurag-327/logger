@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
     visitors,
   } = useStore();
   const [error, setError] = useState(false);
-  const [dropDown, setDropDown] = useState(false);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const callback_url = searchParams.get("callback_url") || null;
@@ -40,26 +40,6 @@ export default function RootLayout({ children }) {
       (async function () {
         const loggedinUser = await supabase.auth.getUser();
         setUser(loggedinUser.data.user);
-        const body = {
-          method: "post",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            clientSecret: process.env.NEXT_PUBLIC_LOGGER_CLIENTSECRET,
-            applicationId: process.env.NEXT_PUBLIC_LOGGER_APPLICATIONID,
-          }),
-        };
-        const res = await fetch("/api/logger", body);
-        const json = await res.json();
-        if (res.status === 200) {
-          var visitors = json || 0;
-          const numberString = visitors.toString();
-          const digitArray = numberString.split("").map(Number);
-          setVisitors(digitArray);
-        } else {
-          console.log(json);
-        }
       })();
       setGlobalLoading(false);
     } catch (error) {
@@ -99,51 +79,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         ) : (
-          <>
-            {!globalLoading && (
-              <button
-                onClick={() => setDropDown(!dropDown)}
-                className="fixed z-[100] h-8 flex items-center justify-center bg-transparent border border-gray-400 rounded-md overlay top-[4.5rem] right-2 sm:right-0"
-              >
-                <div className="flex items-center justify-center h-full gap-2 px-2 text-sm text-white bg-zinc-700">
-                  <Users size={20} className="text-white" weight="fill" />
-                  <span className="flex items-center justify-center ">
-                    logger
-                  </span>
-                </div>
-                <span className="flex items-center justify-center h-full px-2 text-sm text-white bg-green-600">
-                  {visitors}
-                </span>
-                {dropDown && (
-                  <div className="absolute z-[100]  justify-center bg-white items-center border flex flex-col top-10 w-[250px] min-h-[180px] right-2 px-4 py-2 rounded-md">
-                    <CaretUp
-                      className="absolute z-10 -right-1 -top-5 "
-                      size={30}
-                      color="#808080"
-                      weight="fill"
-                    />
-                    <div className="flex flex-col items-center justify-between">
-                      <h2 className="text-lg font-semibold text-black">
-                        Total visitors
-                      </h2>
-                      <ChartBar size={60} color="#000000" weight="fill" />
-                      <ul className="flex gap-px">
-                        {visitors.map((digit) => (
-                          <li className="w-6 h-6 text-white bg-blue-700 rounded-sm">
-                            {digit}
-                          </li>
-                        ))}
-                      </ul>
-                      <span className="mt-4 text-xs text-black">
-                        Powered by logger
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </button>
-            )}
-            {children}
-          </>
+          <>{children}</>
         )}
       </body>
     </html>

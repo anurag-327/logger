@@ -4,7 +4,7 @@ import { Socicons } from "socicons";
 const Home = () => {
   const { user } = useStore();
   return (
-    <div className="mt-28 sm:mt-40">
+    <div className="mt-32 sm:mt-40">
       <div className=" w-full mx-auto sm:max-w-[500px]">
         <div className="px-4 py-1 mx-auto mb-6 transition duration-200 border border-green-300 rounded-full hover:border-green-500 w-fit">
           <p className="text-sm font-semibold text-gray-600">

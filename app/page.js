@@ -58,7 +58,7 @@ export default function page() {
       {!globalLoading && (
         <button
           onClick={() => setDropDown(!dropDown)}
-          className="fixed z-[100] h-9 flex items-center  justify-center bg-transparent  overlay top-[4.2rem] sm:top-20  sm:right-0"
+          className="absolute sm:fixed z-[100] h-9 flex items-center  justify-center bg-transparent  overlay top-[4.2rem] sm:top-20  sm:right-0"
         >
           <div className="flex items-center justify-center h-full gap-2 px-2 text-sm text-white rounded-l-md bg-zinc-700">
             <Users size={20} className="text-white" weight="fill" />

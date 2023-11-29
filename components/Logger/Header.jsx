@@ -25,7 +25,7 @@ const Header = () => {
   const [dropDown, setDropDown] = useState(false);
 
   return (
-    <nav className="sticky top-0 flex justify-between w-full px-2 py-4 bg-gray-400 sm:py-3 sm:px-10 md:px-10 lg:px-40 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+    <nav className="sticky top-0 flex justify-between w-full px-2 py-3 bg-gray-400 sm:py-3 sm:px-10 md:px-10 lg:px-40 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
       <div>
         <h3 className="text-xl font-extrabold ">
           logger

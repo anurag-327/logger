@@ -8,7 +8,7 @@ import Router from "next/router";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/supabase/config";
 import { useSearchParams } from "next/navigation";
-import { CaretUp, ChartBar, Globe } from "phosphor-react";
+import { CaretUp, ChartBar, Globe, User, Users } from "phosphor-react";
 const font = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500"],
@@ -103,10 +103,17 @@ export default function RootLayout({ children }) {
             {!globalLoading && (
               <button
                 onClick={() => setDropDown(!dropDown)}
-                className="absolute z-[100] flex items-center justify-center gap-2 px-4 py-1  bg-black border border-gray-600 rounded-md overlay top-[4.5rem] right-2 sm:right-4"
+                className="fixed z-[100] h-8 flex items-center justify-center bg-transparent border border-gray-400 rounded-md overlay top-[4.5rem] right-2 sm:right-0"
               >
-                <ChartBar size={20} color="#ffffff" weight="fill" />
-                <span className="text-white"> {visitors}</span>
+                <div className="flex items-center justify-center h-full gap-2 px-2 text-sm text-white bg-zinc-700">
+                  <Users size={20} className="text-white" weight="fill" />
+                  <span className="flex items-center justify-center ">
+                    logger
+                  </span>
+                </div>
+                <span className="flex items-center justify-center h-full px-2 text-sm text-white bg-green-600">
+                  {visitors}
+                </span>
                 {dropDown && (
                   <div className="absolute z-[100]  justify-center bg-white items-center border flex flex-col top-10 w-[250px] min-h-[180px] right-2 px-4 py-2 rounded-md">
                     <CaretUp

@@ -10,7 +10,7 @@ const Card = ({ project }) => {
       <span className="flex gap-2 text-sm">
         <Globe size={20} color="#0000ff" /> {project.count}
       </span>
-      <span className="flex w-full gap-2 overflow-hidden text-sm">
+      <span className="flex w-full gap-2 overflow-hidden text-sm whitespace-nowrap">
         <LinkSimpleHorizontal size={20} color="#808080" />
         {project.projectURL}
       </span>

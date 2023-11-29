@@ -36,14 +36,11 @@ const page = () => {
   }, [user]);
   return (
     <>
-      {overlay ? (
-        <Overlay setOverlay={setOverlay} />
-      ) : (
-        <div className="w-full">
-          <Header setOverlay={setOverlay} />
-          <Dashboard error={error} loading={loading} setOverlay={setOverlay} />
-        </div>
-      )}
+      {overlay && <Overlay setOverlay={setOverlay} />}
+      <div className="w-full">
+        <Header setOverlay={setOverlay} />
+        <Dashboard error={error} loading={loading} setOverlay={setOverlay} />
+      </div>
     </>
   );
 };

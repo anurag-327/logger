@@ -20,7 +20,7 @@ const Header = () => {
       </div>
       <div>
         {user ? (
-          <div className="flex gap-4">
+          <div className="flex gap-2 sm:gap-4">
             <a
               className="flex items-center px-4 text-sm text-white bg-black rounded-full py"
               href="/projects"
@@ -35,7 +35,7 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          <div className="flex gap-4">
+          <div className="flex gap-2 sm:gap-4">
             <a
               className="flex items-center px-3 text-sm transition duration-200 border border-green-400 rounded-full hover:border-green-600"
               href="/login"

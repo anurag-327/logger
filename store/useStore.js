@@ -4,6 +4,8 @@ export const useStore = create((set) => ({
   user: null,
   setUser: (item) => set((state) => ({ user: item })),
   resetUser: () => set((state) => ({ user: null })),
+  visitors: [0],
+  setVisitors: (count) => set((state) => ({ visitors: count })),
   projects: [],
   addProject: (item) =>
     set((state) => ({ projects: [item, ...state.projects] })),

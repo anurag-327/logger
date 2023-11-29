@@ -37,20 +37,20 @@ const Header = () => {
       </div>
       <div className="relative">
         <Image
-          src="/github.png"
+          src="/user.svg"
           className="rounded-full cursor-pointer"
           alt="profile-photo"
-          width={35}
-          height={35}
+          width={38}
+          height={38}
           onClick={() => setDropDown(!dropDown)}
         />
-        <div className="absolute z-10 flex items-center justify-center w-4 h-4 bg-white rounded-full -right-1 top-4">
+        {/* <div className="absolute z-10 flex items-center justify-center w-4 h-4 bg-white rounded-full -right-1 top-4">
           <div className="relative w-3 h-3 bg-blue-700 rounded-full"></div>
-        </div>
+        </div> */}
         {dropDown && (
-          <div className="absolute  border flex flex-col top-10 w-[250px] min-h-[100px] right-2 bg-white px-4 py-6 rounded-md">
+          <div className="absolute z-[200]  border flex flex-col top-10 w-[250px] min-h-[100px] right-2 bg-white px-4 py-6 rounded-md">
             <CaretUp
-              className="absolute z-10 -right-1 -top-4 "
+              className="absolute z-[200] -right-1 -top-4 "
               size={30}
               color="#ffffff"
               weight="fill"

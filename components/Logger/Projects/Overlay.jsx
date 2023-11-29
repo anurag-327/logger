@@ -22,7 +22,7 @@ const Overlay = ({ setOverlay }) => {
       .from("projects")
       .insert({
         name: value.name,
-        description: value.description,
+        description: value.description || " ",
         metadata: { projectURL: value.projectURL },
         projectURL: value.projectURL,
       })
@@ -39,11 +39,11 @@ const Overlay = ({ setOverlay }) => {
     }
   };
   return (
-    <div className="absolute z-50 flex items-center justify-center w-full min-h-screen bg-gray-100 overlay bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-      <div className=" relative w-[98%] bg-white h-fit rounded-2xl shadow-md border sm:w-[400px] ">
-        <div className="flex flex-col items-center justify-between w-full pt-4 ">
+    <div className="absolute z-50 flex items-center justify-center w-full min-h-screen bg-gray-100 overlay bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-70">
+      <div className=" relative m-auto w-[90%] py-4 bg-white h-fit rounded-2xl shadow-md border sm:w-[400px] ">
+        <div className="flex flex-col items-center justify-between w-full pt-3 ">
           <Socicons icon="github" size={50} />
-          <h2 className="font-[500] text-lg mt-2">Create a new project</h2>
+          <h2 className="font-[500] text-sm mt-2">Create a new project</h2>
           <hr className="h-[1.2px] mt-6 w-full bg-zinc-300"></hr>
         </div>
         <div className="box-border px-2 py-4 sm:px-8 bg-gray-50">
@@ -92,7 +92,7 @@ const Overlay = ({ setOverlay }) => {
                 </span>
               )}
             </div>
-            <div className="relative w-full rounded-lg">
+            {/* <div className="relative w-full rounded-lg">
               <h3 className="text-sm font-[500]">Description</h3>
               <textarea
                 type="text"
@@ -103,7 +103,7 @@ const Overlay = ({ setOverlay }) => {
                 {...register("description")}
                 name="description"
               />
-            </div>
+            </div> */}
             {error && (
               <div className="flex items-center justify-center gap-2 mt-4 text-sm text-center text-red-800 ">
                 <Warning size={20} color="#7da239" weight="bold" />

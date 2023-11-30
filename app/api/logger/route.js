@@ -5,7 +5,10 @@ import requestIp from "request-ip";
 export const POST = async (req, context) => {
   try {
     const ipAddress =
-      req.headers["x-forwarded-for"] || req.headers["x-real-ip"];
+      req.headers["x-forwarded-for"] ||
+      req.headers["x-real-ip"] ||
+      req.connection?.remoteAddress;
+    console.log(ipAddress);
     const detectedIp = requestIp.getClientIp(req);
     const { clientSecret, applicationId } = await req.json();
     if (applicationId && clientSecret) {

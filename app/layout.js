@@ -82,7 +82,7 @@ export default function RootLayout({ children }) {
         ) : (
           <>
             {children}
-            <Footer />
+            {!globalLoading && <Footer />}
           </>
         )}
       </body>

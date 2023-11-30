@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 const ApplicationDashboard = ({ project, setProject }) => {
   return (
     <div className="sm:px-8 px-2 sm:shadow-md bg-white  mx-auto  border-none sm:border rounded-none sm:rounded-xl border-gray-300 overflow-hidden py-8 w-[100%] sm:max-w-5xl mt-10  justify-center items-start flex-col gap-3">
-      <Toaster position="top-center" reverseOrder />
+      <Toaster position="top-right" reverseOrder />
       <ApplicationCredentials project={project} />
       <GeneralCredentials project={project} setProject={setProject} />
       <DeleteApplication project={project} />
@@ -31,12 +31,14 @@ function ApplicationCredentials({ project }) {
         <div className="px-2 py-2 overflow-auto whitespace-pre-wrap border border-gray-300 rounded-lg shadow-md ">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-base font-[600] ">Client ID</h3>
-            <Copy
-              onClick={() => CopyToClipboard(project.id)}
-              className="cursor-pointer "
-              size={25}
-              weight="light"
-            />
+            <CopyToClipboard
+              text={project.id}
+              onCopy={() => toast.success("copied")}
+            >
+              <button>
+                <Copy className="cursor-pointer " size={25} weight="light" />
+              </button>
+            </CopyToClipboard>
           </div>
           <input
             readOnly
@@ -47,12 +49,15 @@ function ApplicationCredentials({ project }) {
         <div className="px-2 py-2 overflow-auto whitespace-pre-wrap border border-gray-300 rounded-lg shadow-md ">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-base font-[600] ">Client Secret</h3>
-            <Copy
-              onClick={() => CopyToClipboard(project.clientSecret)}
-              className="cursor-pointer "
-              size={25}
-              weight="light"
-            />
+
+            <CopyToClipboard
+              text={project.clientSecret}
+              onCopy={() => toast.success("copied")}
+            >
+              <button>
+                <Copy className="cursor-pointer " size={25} weight="light" />
+              </button>
+            </CopyToClipboard>
           </div>
           <input
             readOnly

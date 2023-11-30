@@ -1,13 +1,12 @@
 "use client";
 import { useStore } from "@/store/useStore";
 import { useEffect, useState } from "react";
-
 import { useRouter } from "next/navigation";
-
 import Header from "@/components/Home/Header";
 import Home from "@/components/Home/Home";
 import { useSearchParams } from "next/navigation";
 import { CaretUp, ChartBar, Globe, User, Users } from "phosphor-react";
+import Image from "next/image";
 export default function page() {
   const router = useRouter();
   const [dropDown, setDropDown] = useState(false);
@@ -54,23 +53,29 @@ export default function page() {
     }
   }, []);
   return (
-    <main className="flex flex-col items-center min-h-screen px-2 sm:px-6 ">
+    <main className="flex flex-col items-center min-h-[90vh] px-2 sm:px-6 ">
       {!globalLoading && (
         <button
           onClick={() => setDropDown(!dropDown)}
           className="absolute sm:fixed  h-9 flex items-center  justify-center bg-transparent  overlay top-[4.2rem] sm:top-20  sm:right-0"
         >
           <div className="flex items-center justify-center h-full gap-2 px-2 text-sm text-white rounded-l-md bg-zinc-700">
-            <Users size={20} className="text-white" weight="fill" />
+            <Image
+              className="rounded-full"
+              src="/logo2.png"
+              width={20}
+              height={20}
+              alt="logo"
+            />
             <span className="flex items-center justify-center ">logger</span>
           </div>
           <span className="flex items-center justify-center h-full px-2 text-sm text-white bg-green-600 min-w-[40px] rounded-r-md">
             {visitors}
           </span>
           {dropDown && (
-            <div className="absolute z-[100]  justify-center bg-white items-center border flex flex-col top-10 w-[250px] min-h-[180px] right-2 px-4 py-2 rounded-md">
+            <div className="absolute z-[100]  justify-center bg-white items-center border flex flex-col top-10 w-[250px] min-h-[180px]  -right-15 sm:right-2 px-4 py-2 rounded-md">
               <CaretUp
-                className="absolute z-10 text-white -right-1 -top-5 "
+                className="absolute z-10 text-white right-20 sm:-right-1 -top-5 "
                 size={30}
                 weight="fill"
               />

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/supabase/config";
 import { useSearchParams } from "next/navigation";
 import { CaretUp, ChartBar, Globe, User, Users } from "phosphor-react";
+import Footer from "@/components/UI/Footer";
 const font = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500"],
@@ -79,7 +80,10 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         ) : (
-          <>{children}</>
+          <>
+            {children}
+            <Footer />
+          </>
         )}
       </body>
     </html>

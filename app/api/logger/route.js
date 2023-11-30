@@ -4,7 +4,8 @@ import requestIp from "request-ip";
 
 export const POST = async (req, context) => {
   try {
-    const userIP = req.headers["x-forwarded-for"];
+    const ipAddress =
+      req.headers["x-forwarded-for"] || req.headers["x-real-ip"];
     const detectedIp = requestIp.getClientIp(req);
     const { clientSecret, applicationId } = await req.json();
     if (applicationId && clientSecret) {
@@ -23,7 +24,7 @@ export const POST = async (req, context) => {
             const count = data[0].count + 1;
             const { error2 } = await supabase
               .from("projects")
-              .update({ count: count, description: userIP })
+              .update({ count: count, description: ipAddress })
               .eq("id", applicationId);
             if (error2)
               return NextResponse.json(
@@ -51,6 +52,9 @@ export const POST = async (req, context) => {
       );
     }
   } catch (error) {
-    return NextResponse.json({ message: "Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { message: "Server Error", error: error.message },
+      { status: 500 }
+    );
   }
 };

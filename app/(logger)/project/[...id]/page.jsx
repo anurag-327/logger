@@ -1,5 +1,6 @@
 "use client";
 import Dashboard from "@/components/Logger/Project/Dashboard";
+import Header from "@/components/Logger/Project/Header";
 import { useStore } from "@/store/useStore";
 import { supabase } from "@/supabase/config";
 import React, { useEffect, useState } from "react";
@@ -45,7 +46,8 @@ const page = ({ params }) => {
         <div className="mt-10 text-red-600">{errormsg}</div>
       ) : (
         <div>
-          <Dashboard project={project} />
+          <Header project={project} />
+          <Dashboard project={project} setProject={setProject} />
         </div>
       )}
     </div>

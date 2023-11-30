@@ -23,7 +23,7 @@ export const POST = async (req, context) => {
             const count = data[0].count + 1;
             const { error2 } = await supabase
               .from("projects")
-              .update({ count: count, description: detectedIp })
+              .update({ count: count, description: userIP })
               .eq("id", applicationId);
             if (error2)
               return NextResponse.json(

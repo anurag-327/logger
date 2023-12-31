@@ -8,7 +8,6 @@ export const POST = async (req, context) => {
       req.headers["x-forwarded-for"] ||
       req.headers["x-real-ip"] ||
       req.connection?.remoteAddress;
-    console.log(ipAddress);
     const detectedIp = requestIp.getClientIp(req);
     const { clientSecret, applicationId } = await req.json();
     if (applicationId && clientSecret) {
@@ -50,7 +49,7 @@ export const POST = async (req, context) => {
       }
     } else {
       return NextResponse.json(
-        { message: "Missing parameters" },
+        { message: "Missing parameters", error: "Missing Parameter" },
         { status: 401 }
       );
     }

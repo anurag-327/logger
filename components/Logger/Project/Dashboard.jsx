@@ -12,6 +12,7 @@ const ApplicationDashboard = ({ project, setProject }) => {
   return (
     <div className="sm:px-8 px-2 sm:shadow-md bg-white  mx-auto  border-none sm:border rounded-none sm:rounded-xl border-gray-300 overflow-hidden py-8 w-[100%] sm:max-w-5xl mt-10  justify-center items-start flex-col gap-3">
       <Toaster position="top-right" reverseOrder />
+      <Stats />
       <ApplicationCredentials project={project} />
       <GeneralCredentials project={project} setProject={setProject} />
       <DeleteApplication project={project} />
@@ -21,14 +22,18 @@ const ApplicationDashboard = ({ project, setProject }) => {
 
 export default ApplicationDashboard;
 
+function Stats({ project }) {
+  return <div>stats</div>;
+}
+
 function ApplicationCredentials({ project }) {
   return (
-    <div className="w-[100%] mt-10   sm:max-w-[500px] mx-auto">
+    <div className="w-[100%] mt-10   sm:max-w-full mx-auto">
       <div className="flex flex-col gap-4 px-4 py-4 border border-gray-300 rounded-md shadow-md">
         <h2 className="flex gap-4 my-2 text-2xl font-bold text-start ">
           # Application credentials
         </h2>
-        <div className="px-2 py-2 overflow-auto whitespace-pre-wrap border border-gray-300 rounded-lg shadow-md ">
+        <div className="px-2 py-2 overflow-auto whitespace-pre-wrap rounded-lg ">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-base font-[600] ">Client ID</h3>
             <CopyToClipboard
@@ -46,7 +51,7 @@ function ApplicationCredentials({ project }) {
             defaultValue={project.id}
           />
         </div>
-        <div className="px-2 py-2 overflow-auto whitespace-pre-wrap border border-gray-300 rounded-lg shadow-md ">
+        <div className="px-2 py-2 overflow-auto whitespace-pre-wrap rounded-lg ">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-base font-[600] ">Client Secret</h3>
 
@@ -98,7 +103,7 @@ function GeneralCredentials({ project, setProject }) {
       <form
         id="Form"
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col mt-10 border py-4 shadow-md rounded-md border-gray-300  px-3  w-[100%]  sm:max-w-[500px] mx-auto "
+        className="flex flex-col mt-10 border py-4 shadow-md rounded-md border-gray-300  px-3  w-[100%]  sm:max-w-full mx-auto "
       >
         <h2 className="flex w-full gap-4 my-2 text-2xl font-bold text-center ">
           # Application Details
@@ -148,8 +153,8 @@ function GeneralCredentials({ project, setProject }) {
         <div className="mt-4">
           <button
             disabled={loading}
-            className={`w-[100%] block border-none px-2 py-3 cursor-pointer ${
-              loading ? "bg-green-300" : "bg-green-600"
+            className={`w-full block border-none px-2 py-2 cursor-pointer ${
+              loading ? "bg-green-300" : "bg-blue-400 "
             } bg-blue-600 text-white text-lg font-semibold rounded-md`}
             type="Submit"
           >
@@ -178,7 +183,7 @@ function DeleteApplication({ project }) {
     }
   }
   return (
-    <div className="w-[100%] sm:max-w-[500px] mx-auto">
+    <div className="w-[100%] sm:max-w-full mx-auto">
       <div className="w-full px-4 py-6 mt-10 overflow-auto whitespace-pre-wrap border border-gray-300 rounded-lg shadow-md ">
         <div className="w-full ">
           <h3 className="mb-2 text-2xl font-bold "># Delete Project</h3>

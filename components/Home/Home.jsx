@@ -1,5 +1,5 @@
 import { useStore } from "@/store/useStore";
-import { ArrowArcRight, ArrowBendRightDown } from "phosphor-react";
+import { ArrowArcRight, ArrowBendRightDown, ArrowRight } from "phosphor-react";
 import { Socicons } from "socicons";
 const Home = () => {
   const { user } = useStore();
@@ -35,11 +35,10 @@ const Home = () => {
           </a>
           <a
             className="flex items-center justify-center gap-2 px-4 py-1 text-sm border border-green-500 rounded-full w-fit"
-            href="https://www.github.com/anurag-327/logger"
-            target="_blank"
+            href="/playground"
           >
-            <Socicons size={20} icon="github" />
-            Star on github
+            Playground
+            <ArrowRight size={20} />
           </a>
         </div>
       </div>

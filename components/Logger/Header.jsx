@@ -60,30 +60,28 @@ const Header = () => {
               <span className="text-base font-[500] ">
                 {user.user_metadata.full_name}
               </span>
-              <span className="-mt-1 overflow-hidden text-xs text-gray-400">
+              <span className="overflow-hidden text-xs text-gray-400 ">
                 {user.email}
               </span>
             </div>
             {/* <hr className="w-full h-[1.5px] mt-4 bg-black rounded-full "></hr> */}
             <div className="flex flex-col gap-3">
-              <a href="/settings" className="flex items-center gap-1 mt-4">
-                <Gear size={18} weight="regular" />
-                Setting
-              </a>
-
-              <a href="/projects" className="flex items-center gap-1">
-                <CirclesThreePlus size={18} />
-                Projects
-              </a>
-              <a href="/" className="flex items-center gap-1">
+              <a href="/" className="flex items-center gap-1 mt-4">
                 <House size={18} weight="regular" />
                 Home
               </a>
-              <a href="/help" className="flex items-center gap-1">
-                <Question size={18} weight="regular" />
-                Help
+              <a href="/projects" className="flex items-center gap-1 ">
+                <CirclesThreePlus size={18} />
+                Projects
               </a>
-
+              <a href="/playground" className="flex items-center gap-1">
+                <Question size={18} weight="regular" />
+                Playground
+              </a>
+              <a href="/settings" className="flex items-center gap-1">
+                <Gear size={18} weight="regular" />
+                Setting
+              </a>
               <button
                 onClick={handleSignOut}
                 className="flex items-center gap-1"

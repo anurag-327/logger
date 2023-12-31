@@ -6,17 +6,17 @@ Welcome to the Logger's documentation. This guide will help you how to use logge
 
 Logger is your partner for counting visitors with ease, offering insights without intrusion.
 
-# \***\*Getting Started\*\***
+# **Getting Started**
 
-1. \***\*Registering Your Application\*\***
+1. **Registering Your Application**
 
    1. Log in to Logger .
    2. Create a new project by providing project's name and URL.
 
-2. \***\*Obtaining API Credentials\*\***
+2. **Obtaining API Credentials**
    Once you've registered your application, you will receive the following credentials:
 
-   - ClientId: Unique identification for your your project
+   - applicationId: Unique identification for your your project
    - clientSecret:
 
 # Implementation
@@ -32,7 +32,7 @@ Logger is your partner for counting visitors with ease, offering insights withou
    headers:{
    "content-type":"application/json",
    },
-   body:JSON.stringify({clientId:<Application ClientId>, clientSecret:<Application Secret>})
+   body:JSON.stringify({applicationId:<Application ClientId>, clientSecret:<Application Secret>})
    }
    const response=await fetch("https://logger-mocha-six.vercel.app/api/logger",body);
    const data=await response.json();
@@ -43,7 +43,7 @@ Logger is your partner for counting visitors with ease, offering insights withou
 1. **Response schema**
 
 ```jsx
-**1- OK Response
+1- OK Response
 {
    visitors count
 }
@@ -52,7 +52,7 @@ Logger is your partner for counting visitors with ease, offering insights withou
 {
   error: <ERROR>
   message:<ERROR MESSAGE>
-}**
+}
 ```
 
 # Contact

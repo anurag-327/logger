@@ -1,8 +1,7 @@
 import { supabase } from "@/supabase/config";
 import { NextResponse, NextRequest } from "next/server";
 import requestIp from "request-ip";
-
-export const POST = async (req, context) => {
+export const POST = async (req, res, context) => {
   try {
     const ipAddress =
       req.headers["x-forwarded-for"] ||
@@ -59,4 +58,8 @@ export const POST = async (req, context) => {
       { status: 500 }
     );
   }
+};
+export const GET = async (req, res, context) => {
+  console.log("Request recieved");
+  return NextResponse.json({ message: "Hii, From logger" }, { status: 200 });
 };

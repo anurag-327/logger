@@ -52,7 +52,7 @@ export default function RootLayout({ children }) {
       <body
         className={
           font.className +
-          " bg-gradient-to-r from-blue-50 to-blue-100  via-orange-50"
+          " bg-gradient-to-r scroll-smooth from-blue-50 to-blue-100  via-orange-50"
         }
       >
         {globalLoading ? (

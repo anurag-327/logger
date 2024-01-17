@@ -1,16 +1,16 @@
 import React from "react";
 import Editor from "@monaco-editor/react";
 import Image from "next/image";
+import Code from "./Code";
 const Playground = () => {
-  const code = `
-  const body = {
-        method: "post",
+  const code = `const body = {
+        method: "POST",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          clientSecret: CLIENTSECRET,
-          applicationId: APPLICATIONID,
+          clientSecret: YOUR_CLIENT_SECRET,
+          applicationId: YOUR_APPLICATION_ID,
         }),
       };
       const res = await fetch("https://logger-mocha-six.vercel.app/api/logger", body);
@@ -21,96 +21,130 @@ const Playground = () => {
         // error
         console.log(json);
       }`;
-  const error = `response={
+  const response = `// success (200)
+  visitors
+
+  
+  //Error
+  {
         message: "message",
         error:"error"
-      }`;
-  const badge = `<div className="flex items-center justify-center h-full gap-2 px-2 text-sm text-white rounded-l-md bg-zinc-700"><img
+  }`;
+  const body = `{
+    applicationId: YOUR_APPLICATION_ID,
+    clientSecret: YOUR_CLIENT_SECRET,
+}`;
+  const badge = `<a
+  href="https://logger-mocha-six.vercel.app/"
+  target="blank"
+  title="Powered by logger"
+  className="fixed h-9 hidden no-underline  right-0 md:flex gap-1 items-center justify-center  text-sm text-white rotate-90 top-[35%] md:top-[20%]  rounded-l-md bg-zinc-700"
+>
+  <div className="flex items-center justify-center h-full pl-2">
+    <img
       className="rounded-full"
       src="https://logger-mocha-six.vercel.app/logo2.png"
       width={20}
       height={20}
       alt="logo"
     />
-    <span className="flex items-center justify-center ">logger</span>
   </div>
-  <span className="flex items-center justify-center h-full px-2 text-sm text-white bg-green-600 min-w-[40px] rounded-r-md">
-    {count}
-  </span></div>`;
+  <div className="flex h-full gap-1">
+    <span className="flex items-center justify-center ">Visitors</span>
+    <span className="flex items-center justify-center h-full px-1 text-sm text-white bg-green-600 min-w-[40px] ">
+      {" "}
+      {visitors}{" "}
+    </span>
+  </div>
+</a>`;
 
   return (
-    <div className="w-[95%]  sm:w-[70%] sm:min-w-[600px] rounded-md p-2 sm:p-4 border mt-20">
-      <h2 className="text-2xl font-semibold">
-        <span># </span>PlayGround
-      </h2>
-      <div className="mt-10 ">
-        <p>You can setup logger by following simple steps:</p>
-        <div className="mt-4 ">
-          <ol className="ml-10 list-decimal">
+    <div className="w-[95%] bg-white  sm:w-[70%] sm:min-w-[600px] rounded-md p-2 sm:p-4 border mt-20">
+      <div>
+        <h2 className="text-4xl font-bold md:text-5xl">Setting up logger</h2>
+        <p className="mt-4">Welcome to logger</p>
+        <hr className="h-[1.5px] mt-6 mb-4 bg-zinc-300 "></hr>
+        <p>This blog will guide you setting up logger in your projects.</p>
+      </div>
+      <div className="mt-8">
+        <h2 className="text-3xl md:w-[60%] font-[500]">
+          Step-by-Step Guide: Integrating Logger with Your Application
+        </h2>
+        <div className="mt-6">
+          <h3 className="text-xl font-[450]">
+            Step 1: Register Your Application
+          </h3>
+          <ol type="1" className="mt-6 ml-8 list-decimal md:ml-16">
             <li>
-              <a className="text-blue-600 underline" href="/dashboard">
-                Register your application to logger
-              </a>
+              Navigate to the Logger Dashboard by signing in to your account.
             </li>
-            <li>Grab your credentials</li>
-            <li>Drop a post request on API Endpoint with your credentials</li>
-            <li>Api returns you the latest stats on your project</li>
+            <li>Click on the "Add New Application" button.</li>
+            <li>
+              Fill in the required information for your application, including
+              the name and application URL.
+            </li>
+            <li>Click "Create" to register your application.</li>
+            <li>
+              Once your application is created, you will be provided with an API
+              key. This key will be essential for making API requests.
+            </li>
           </ol>
-          <div className="flex flex-col gap-2 mt-10">
-            <span>
-              API Endpoint:{" "}
-              <span className="text-blue-800 underline">
-                https://logger-mocha-six.vercel.app/api/logger
-              </span>
-            </span>
-            <div>
-              <span className="font-semibold">Sample Request: </span>
-              <div className="relative flex flex-col w-full gap-1">
-                <Editor
-                  height={400}
-                  defaultLanguage="javascript"
-                  theme="light"
-                  defaultValue={code}
-                  className="py-2 overflow-hidden cursor-not-allowed"
-                />
-                <div className="flex flex-col gap-1">
-                  <span className="font-semibold">Response Schema: </span>
-                  <div className="ml-6">
-                    <span className="">Sucess: </span>
-                    <div>
-                      <Editor
-                        height={20}
-                        defaultLanguage="javascript"
-                        theme="light"
-                        defaultValue="count // visitors count"
-                        className="overflow-hidden cursor-not-allowed "
-                      />
-                    </div>
-                  </div>
-                  <div className="ml-6">
-                    <span className="">Bad Response: </span>
-                    <div>
-                      <Editor
-                        height={100}
-                        defaultLanguage="javascript"
-                        theme="light"
-                        defaultValue={error}
-                        className="py-2 overflow-hidden cursor-not-allowed "
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div className="mt-6">
+          <h3 className="text-xl font-[450]">Step 2: Grab your credentials</h3>
+          <ol type="1" className="mt-6 ml-8 list-decimal md:ml-16">
+            <li>
+              After creating your application, go to the "Projects" section in
+              the Logger Dashboard.
+            </li>
+            <li>
+              Locate your newly created application and copy the applicationId
+              and clientSecret associated with it.
+            </li>
+            <li>
+              Ensure you securely store your API key, as it will be used to
+              authenticate requests to the Logger API.
+            </li>
+          </ol>
+        </div>
+        <div className="mt-6">
+          <h3 className="text-xl font-[450]">
+            Step 3: Drop a post request from your apllication
+          </h3>
+          <div className="mt-4 ml-8 md:ml-16">
+            <p className="mt-4">
+              Now that you have registered your application and obtained your
+              credentials, you can make a POST request to the Logger API
+              endpoint to record visits and retrieve the latest statistics for
+              your project.
+            </p>
+            <div className="mt-4">
+              <h3 className="text-xl font-[450]">1 : API Endpoint</h3>
+              <Code
+                code="https://logger-mocha-six.vercel.app/api/logger"
+                heading="Api"
+              />
+            </div>
+            <div className="mt-4">
+              <h3 className="text-xl font-[450]">2 : Request Body</h3>
+              <Code code={body} heading="JSON" />
             </div>
           </div>
-          <div className="flex flex-col gap-1 mt-2">
-            <span className="font-semibold">Logger badge</span>
-            <Image src="/badge.png" alt="badge" width={100} height={50} />
-            <div className="flex flex-col gap-1 p-2 mt-4 bg-gray-100 rounded-md">
-              <span className="font-semibold">Badge code:</span>
-              <span>{badge}</span>
-            </div>
-          </div>
+        </div>
+        <div className="mt-6">
+          <h3 className="text-xl font-[450]">
+            Step 4: Api returns latest stats and records
+          </h3>
+          <Code code={response} heading="JSON" />
+        </div>
+        <div className="mt-4">
+          <h3 className="text-3xl font-[450]">Example Usage</h3>
+          <mark>Use method="POST" to avoid cors issues</mark>
+          <Code code={code} heading="Javascript" />
+        </div>
+        <div className="mt-6">
+          <h3 className="text-2xl font-[450]">Logger powered badge</h3>
+          <Code code={badge} heading="HTML" />
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { socials } from "@/data/data";
 const Footer = () => {
   return (
     <footer className="flex items-center justify-between w-full px-4 py-6 sm:px-10 text-start ">
-      <span>Logger © 2023</span>
+      <span>Logger © 2024</span>
       <div className="flex items-center gap-2 ">
         <a href="https://github.com/anurag-327" target="blank">
           <GithubLogo size={25} className="" />

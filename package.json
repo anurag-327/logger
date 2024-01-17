@@ -17,6 +17,7 @@
     "nextjs-cors": "^2.2.0",
     "phosphor-react": "^1.4.1",
     "react": "^18",
+    "react-code-blocks": "^0.1.5",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",

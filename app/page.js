@@ -68,7 +68,7 @@ export default function page() {
               height={20}
               alt="logo"
             />
-            <span className="flex items-center justify-center ">logger</span>
+            <span className="flex items-center justify-center ">Visitors</span>
           </div>
           <span className="flex items-center justify-center h-full px-2 text-sm text-white bg-green-600 min-w-[40px] rounded-r-md">
             {visitors}

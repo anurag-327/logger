@@ -36,7 +36,7 @@ export default function page() {
             applicationId: process.env.NEXT_PUBLIC_LOGGER_APPLICATIONID,
           }),
         };
-        const res = await fetch("/api/logger", body);
+        const res = await fetch("/api/logger/v1", body);
         const json = await res.json();
         if (res.status === 200) {
           var visitors = json || 0;

@@ -8,10 +8,11 @@ export const config = {
 
 export default function middleware(request) {
   const url = new URL(request.url);
+  const ip = request.ip;
   const city = request.geo.city;
   const country = (request.geo && request.geo.country) || "US";
   const region = request.geo.region;
-  console.log(url, city, country, region);
+  // console.log(url, city, country, region);
   // request.geo.latitude
   // request.geo.longitude
 
@@ -24,13 +25,14 @@ export default function middleware(request) {
   // }
 
   // Rewrite to URL
-  return NextResponse.json(
-    {
-      url: url,
-      country: country,
-      region: region,
-      city: city,
-    },
-    { status: 200 }
-  );
+  // return NextResponse.json(
+  //   {
+  //     ip: ip,
+  //     url: url,
+  //     country: country,
+  //     region: region,
+  //     city: city,
+  //   },
+  //   { status: 200 }
+  // );
 }

@@ -2,13 +2,19 @@ import { supabase } from "@/supabase/config";
 import { NextResponse, NextRequest } from "next/server";
 import requestIp from "request-ip";
 
-export const GET = async (req, res) => {
+export const GET = async (request, res) => {
+  const url = new URL(request.url);
+  const ip = request.ip;
+  const city = request.geo.city;
+  const country = (request.geo && request.geo.country) || "US";
+  const region = request.geo.region;
   return NextResponse.json(
     {
-      url: req.url,
-      country: req.country || "undefined",
-      region: req.region || "undefined",
-      city: req.city || "undefined",
+      ip: ip,
+      url: url,
+      country: country,
+      region: region,
+      city: city,
     },
     { status: 200 }
   );

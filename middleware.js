@@ -1,40 +1,28 @@
+import bodyParser from "body-parser";
+const jsonParser = bodyParser.json();
+
 import { NextResponse } from "next/server";
-
-const BLOCKED_COUNTRY = "SE";
-
 export const config = {
   matcher: "/api/logger/v1",
 };
 
-export default function middleware(request) {
+export default function middleware(request, res, next) {
+  // const res = NextResponse.next();
   const url = new URL(request.url);
   const ip = request.ip;
   const city = request.geo.city;
-  const country = (request.geo && request.geo.country) || "US";
+  const country = (request.geo && request.geo.country) || "IN";
   const region = request.geo.region;
-  // console.log(url, city, country, region);
   const latitude = request.geo.latitude;
   const longitude = request.geo.longitude;
-
-  // console.log(`Visitor from ${country}`, request.ip);
-
-  // if (country === BLOCKED_COUNTRY) {
-  //   console.log("Bhaag bhootni ke");
-  // } else {
-  //   console.log("Aaja bete");
-  // }
-
-  // Rewrite to URL
-  return NextResponse.json(
-    {
-      ip: ip,
-      url: url,
-      country: country,
-      region: region,
-      city: city,
-      latitude: latitude,
-      longitude: longitude,
-    },
-    { status: 200 }
-  );
+  const details = {
+    ip: ip,
+    url: url,
+    country: country,
+    region: region,
+    city: city,
+    latitude: latitude,
+    longitude: longitude,
+  };
+  // return NextResponse.json(details, { status: 200 });
 }

@@ -13,8 +13,8 @@ export default function middleware(request) {
   const country = (request.geo && request.geo.country) || "US";
   const region = request.geo.region;
   // console.log(url, city, country, region);
-  // request.geo.latitude
-  // request.geo.longitude
+  const latitude = request.geo.latitude;
+  const longitude = request.geo.longitude;
 
   // console.log(`Visitor from ${country}`, request.ip);
 
@@ -25,14 +25,16 @@ export default function middleware(request) {
   // }
 
   // Rewrite to URL
-  // return NextResponse.json(
-  //   {
-  //     ip: ip,
-  //     url: url,
-  //     country: country,
-  //     region: region,
-  //     city: city,
-  //   },
-  //   { status: 200 }
-  // );
+  return NextResponse.json(
+    {
+      ip: ip,
+      url: url,
+      country: country,
+      region: region,
+      city: city,
+      latitude: latitude,
+      longitude: longitude,
+    },
+    { status: 200 }
+  );
 }

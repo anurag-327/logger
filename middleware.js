@@ -11,6 +11,7 @@ export default function middleware(request) {
   const city = request.geo.city;
   const country = (request.geo && request.geo.country) || "US";
   const region = request.geo.region;
+  console.log(url, city, country, region);
   // request.geo.latitude
   // request.geo.longitude
 
@@ -23,10 +24,13 @@ export default function middleware(request) {
   // }
 
   // Rewrite to URL
-  return NextResponse.rewrite(
-    request.url,
-    request.city,
-    request.country,
-    request.region
+  return NextResponse.json(
+    {
+      url: url,
+      country: country,
+      region: region,
+      city: city,
+    },
+    { status: 200 }
   );
 }

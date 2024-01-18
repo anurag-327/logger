@@ -20,5 +20,5 @@ export default function middleware(request, res, next) {
     latitude: latitude,
     longitude: longitude,
   };
-  // return NextResponse.json(details, { status: 200 });
+  return NextResponse.json(details, { status: 200 });
 }

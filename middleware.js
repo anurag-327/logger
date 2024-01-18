@@ -4,14 +4,14 @@ export const config = {
 };
 
 export default function middleware(request, res, next) {
-  const url = new URL(request.url);
-  const ip = request.ip;
-  const city = request.geo.city;
+  const ip = request.ip || "127.0.0.1";
+  const city = request.geo.city || "Delhi";
   const country = (request.geo && request.geo.country) || "IN";
-  const region = request.geo.region;
-  const latitude = request.geo.latitude;
-  const longitude = request.geo.longitude;
-  const details = {
+  const region = request.geo.region || "Delhi";
+  const latitude = request.geo.latitude || "28.64857000";
+  const longitude = request.geo.longitude || "77.21895000";
+  const url = request.url;
+  const data = {
     ip: ip,
     url: url,
     country: country,
@@ -20,5 +20,13 @@ export default function middleware(request, res, next) {
     latitude: latitude,
     longitude: longitude,
   };
-  return NextResponse.json(details, { status: 200 });
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-logger-data", JSON.stringify(data));
+
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
+  return response;
 }

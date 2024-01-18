@@ -1,22 +1,14 @@
 import { supabase } from "@/supabase/config";
 import { NextResponse, NextRequest } from "next/server";
 
-export const GET = async (request, response) => {
-  const url = new URL(request.url);
-  const ip = request.ip || "undefined";
-  const city = request.geo.city || "undefined";
-  const country = (request.geo && request.geo.country) || "IN";
-  const region = request.geo.region || "Asia";
-  const latitude = request.geo.latitude || "undefined";
-  const longitude = request.geo.longitude || "undefined";
-  const details = {
-    ip: ip,
-    url: url,
-    country: country,
-    region: region,
-    city: city,
-    latitude: latitude,
-    longitude: longitude,
-  };
-  return NextResponse.json(details, { status: 200 });
+export const GET = async (req, res) => {
+  const data = JSON.parse(req.headers.get("x-logger-data"));
+
+  return NextResponse.json(data, { status: 200 });
+};
+export const POST = async (req, response, context) => {
+  const data = JSON.parse(req.headers.get("x-logger-data"));
+  const { clientSecret, applicationId } = await req.json();
+  console.log(clientSecret, applicationId);
+  return NextResponse.json(data, { status: 200 });
 };

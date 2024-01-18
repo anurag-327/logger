@@ -3,12 +3,12 @@ import { NextResponse, NextRequest } from "next/server";
 
 export const GET = async (request, response) => {
   const url = new URL(request.url);
-  const ip = request.ip;
-  const city = request.geo.city;
+  const ip = request.ip || "undefined";
+  const city = request.geo.city || "undefined";
   const country = (request.geo && request.geo.country) || "IN";
-  const region = request.geo.region;
-  const latitude = request.geo.latitude;
-  const longitude = request.geo.longitude;
+  const region = request.geo.region || "Asia";
+  const latitude = request.geo.latitude || "undefined";
+  const longitude = request.geo.longitude || "undefined";
   const details = {
     ip: ip,
     url: url,

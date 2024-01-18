@@ -1,13 +1,9 @@
-import bodyParser from "body-parser";
-const jsonParser = bodyParser.json();
-
 import { NextResponse } from "next/server";
 export const config = {
   matcher: "/api/logger/v1",
 };
 
 export default function middleware(request, res, next) {
-  // const res = NextResponse.next();
   const url = new URL(request.url);
   const ip = request.ip;
   const city = request.geo.city;

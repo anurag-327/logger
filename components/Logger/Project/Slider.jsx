@@ -9,7 +9,7 @@ const Slider = ({ section, setSection }) => {
   return (
     <div
       id="slider"
-      className="w-[350px] z-10 p-4  hidden lg:block  absolute lg:static  min-h-screen bg-white"
+      className="w-[80%] lg:w-[350px] z-10 p-4  hidden lg:block  absolute lg:static  min-h-screen bg-white"
     >
       <div className="flex flex-col items-start justify-start gap-2 ">
         <button

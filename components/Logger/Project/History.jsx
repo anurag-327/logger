@@ -13,7 +13,7 @@ const History = ({ logs }) => {
   }
   function Sidebar() {
     return (
-      <div className="order-2 w-[350px] right-0 bg-white absolute xl:static  p-2 border-l ">
+      <div className="order-2 w-[90%] sm:w-[350px] right-0 bg-white absolute xl:static  p-2 border-l ">
         {!sidebar ? (
           <div className="flex-col items-center justify-center hidden h-full xl:flex">
             <Notepad size={30} />
@@ -33,7 +33,7 @@ const History = ({ logs }) => {
         <table className="w-full mt-6 overflow-hidden text-sm bg-white divide-gray-200 h-fit">
           <thead className="border-b-2">
             <tr>
-              <th className="sticky inset-y-0 px-4 py-3 bg-white start-0">
+              {/* <th className="sticky inset-y-0 px-4 py-3 bg-white start-0">
                 <label htmlFor="SelectAll" className="sr-only">
                   Select All
                 </label>
@@ -43,7 +43,7 @@ const History = ({ logs }) => {
                   id="SelectAll"
                   className="w-5 h-5 border-gray-300 rounded"
                 />
-              </th>
+              </th> */}
               <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
                 Time
               </th>
@@ -67,10 +67,10 @@ const History = ({ logs }) => {
                   onClick={() => setSidebar(data)}
                   key={data.id}
                   className={`${
-                    data === sidebar && "bg-gray-100"
-                  } py-4 overflow-hidden cursor-pointer hover:bg-gray-100`}
+                    data === sidebar && "bg-orange-100"
+                  } py-4 overflow-hidden cursor-pointer hover:bg-orange-100`}
                 >
-                  <td className="sticky inset-y-0 px-4 py-3 bg-white start-0">
+                  {/* <td className="sticky inset-y-0 px-4 py-3 bg-white start-0">
                     <label className="sr-only" htmlFor="Row1">
                       Row 1
                     </label>
@@ -80,7 +80,7 @@ const History = ({ logs }) => {
                       type="checkbox"
                       id="Row1"
                     />
-                  </td>
+                  </td> */}
                   <td className="px-4 py-3 overflow-auto text-gray-800 whitespace-pre ">
                     {data.time}
                   </td>

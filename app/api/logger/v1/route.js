@@ -47,6 +47,20 @@ async function getApllication(applicationId, clientSecret) {
   return { data, error };
 }
 async function setLogs(logs, applicationId) {
+  const currentDate = new Date();
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short",
+  };
+  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+    currentDate
+  );
+
   const { data, error } = await supabase
     .from("logs")
     .insert({
@@ -59,6 +73,8 @@ async function setLogs(logs, applicationId) {
       region: logs.region,
       host: logs.host,
       userAgent: logs.userAgent,
+      time: formattedDate,
+      ua: logs.ua,
     })
     .select();
   return { data, error };

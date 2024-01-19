@@ -11,8 +11,7 @@ export default function middleware(request, res, next) {
   const latitude = request.geo.latitude || "28.64857000";
   const longitude = request.geo.longitude || "77.21895000";
   const url = request.url;
-  const userAgent = JSON.stringify(request.headers["user-agent"]);
-  // const ua = request.ua || "undefined";
+  const requestHeaders = new Headers(request.headers);
   const data = {
     ip: ip,
     url: url,
@@ -21,9 +20,9 @@ export default function middleware(request, res, next) {
     city: city,
     latitude: latitude,
     longitude: longitude,
-    userAgent: userAgent,
+    userAgent: requestHeaders.get("user-agent"),
+    host: requestHeaders.get("host"),
   };
-  const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-logger-data", JSON.stringify(data));
 
   const response = NextResponse.next({

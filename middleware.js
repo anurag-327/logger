@@ -1,36 +1,81 @@
 import { NextResponse } from "next/server";
-
-const BLOCKED_COUNTRY = "SE";
-
 export const config = {
   matcher: "/api/logger/v1",
 };
 
-export default function middleware(request) {
-  const url = new URL(request.url);
-  const city = request.geo.city;
-  const country = (request.geo && request.geo.country) || "US";
-  const region = request.geo.region;
-  console.log(url, city, country, region);
-  // request.geo.latitude
-  // request.geo.longitude
+export default function middleware(request, res, next) {
+  const ip = request.ip || "127.0.0.1";
+  const city = request.geo.city || "Delhi";
+  const country = (request.geo && request.geo.country) || "IN";
+  const region = request.geo.region || "Delhi";
+  const latitude = request.geo.latitude || "28.64857000";
+  const longitude = request.geo.longitude || "77.21895000";
+  const url = request.url;
+  const requestHeaders = new Headers(request.headers);
+  const userAgent = requestHeaders.get("user-agent");
+  const host = requestHeaders.get("host");
+  const parsedUA = parseUserAgent(userAgent);
+  const data = {
+    ip: ip,
+    url: url,
+    country: country,
+    region: region,
+    city: city,
+    latitude: latitude,
+    longitude: longitude,
+    userAgent: parsedUA,
+    ua: userAgent,
+    host: host,
+  };
 
-  // console.log(`Visitor from ${country}`, request.ip);
+  requestHeaders.set("x-logger-data", JSON.stringify(data));
 
-  // if (country === BLOCKED_COUNTRY) {
-  //   console.log("Bhaag bhootni ke");
-  // } else {
-  //   console.log("Aaja bete");
-  // }
-
-  // Rewrite to URL
-  return NextResponse.json(
-    {
-      url: url,
-      country: country,
-      region: region,
-      city: city,
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
     },
-    { status: 200 }
-  );
+  });
+  return response;
 }
+
+function parseUserAgent(uaString) {
+  const result = {
+    browser: {
+      name: null,
+      version: null,
+    },
+    os: {
+      name: null,
+      version: null,
+    },
+    device: null,
+  };
+
+  // Regular expressions to match browser, version, and operating system
+  const browserRegex = /(Chrome|Firefox|Safari|Edge)\/([0-9.]+)/i;
+  const osRegex = /(Windows NT|Mac OS X|Linux|iOS|Android) ([0-9._]+)/i;
+  const mobileRegex = /(Mobile|Tablet)/i;
+
+  // Extract browser information
+  const browserMatch = uaString.match(browserRegex);
+  if (browserMatch) {
+    result.browser.name = browserMatch[1];
+    result.browser.version = browserMatch[2];
+  }
+
+  // Extract operating system information
+  const osMatch = uaString.match(osRegex);
+  if (osMatch) {
+    result.os.name = osMatch[1];
+    result.os.version = osMatch[2];
+  }
+
+  // Check for mobile or tablet device
+  if (uaString.match(mobileRegex)) {
+    result.device = "Mobile/Tablet";
+  }
+
+  return result;
+}
+
+// Example usage

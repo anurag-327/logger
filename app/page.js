@@ -7,7 +7,7 @@ import Home from "@/components/Home/Home";
 import { useSearchParams } from "next/navigation";
 import { CaretUp, ChartBar, Globe, User, Users } from "phosphor-react";
 import Image from "next/image";
-import Playground from "@/components/UI/Playground";
+import Playground from "@/components/Playground/Playground";
 export default function page() {
   const router = useRouter();
   const [dropDown, setDropDown] = useState(false);
@@ -36,7 +36,7 @@ export default function page() {
             applicationId: process.env.NEXT_PUBLIC_LOGGER_APPLICATIONID,
           }),
         };
-        const res = await fetch("/api/logger", body);
+        const res = await fetch("/api/logger/v1", body);
         const json = await res.json();
         if (res.status === 200) {
           var visitors = json || 0;

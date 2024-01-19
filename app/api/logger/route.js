@@ -3,11 +3,6 @@ import { NextResponse, NextRequest } from "next/server";
 import requestIp from "request-ip";
 export const POST = async (req, res, context) => {
   try {
-    const ipAddress =
-      req.headers["x-forwarded-for"] ||
-      req.headers["x-real-ip"] ||
-      req.connection?.remoteAddress;
-    const detectedIp = requestIp.getClientIp(req);
     const { clientSecret, applicationId } = await req.json();
     if (applicationId && clientSecret) {
       const { data, error } = await supabase

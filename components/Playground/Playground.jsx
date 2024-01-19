@@ -1,6 +1,3 @@
-import React from "react";
-import Editor from "@monaco-editor/react";
-import Image from "next/image";
 import Code from "./Code";
 const Playground = () => {
   const code = `const body = {
@@ -13,7 +10,7 @@ const Playground = () => {
           applicationId: YOUR_APPLICATION_ID,
         }),
       };
-      const res = await fetch("https://logger-mocha-six.vercel.app/api/logger", body);
+      const res = await fetch("https://logger-mocha-six.vercel.app/api/logger/v1", body);
       const json = await res.json();
       if (res.status === 200) {
         visitors = json;
@@ -27,7 +24,6 @@ const Playground = () => {
   
   //Error
   {
-        message: "message",
         error:"error"
   }`;
   const body = `{
@@ -121,7 +117,7 @@ const Playground = () => {
             <div className="mt-4">
               <h3 className="text-xl font-[450]">1 : API Endpoint</h3>
               <Code
-                code="https://logger-mocha-six.vercel.app/api/logger"
+                code="https://logger-mocha-six.vercel.app/api/logger/v1"
                 heading="Api"
               />
             </div>

@@ -11,7 +11,7 @@ export default function middleware(request, res, next) {
   const latitude = request.geo.latitude || "28.64857000";
   const longitude = request.geo.longitude || "77.21895000";
   const url = request.url;
-  const userAgent = request.userAgent || "undefined";
+  const userAgent = JSON.stringify(request.headers["user-agent"]);
   // const ua = request.ua || "undefined";
   const data = {
     ip: ip,

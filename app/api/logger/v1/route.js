@@ -14,8 +14,8 @@ export const POST = async (req, res, context) => {
         await getApllication(applicationId, clientSecret);
       if (!applicationError && applicationDetails.length > 0) {
         const updatedCount = applicationDetails[0].count + 1;
-        // if (logs.ip === "127.0.0.1")
-        //   return NextResponse.json(updatedCount, { status: 200 });
+        if (logs.ip === "127.0.0.1")
+          return NextResponse.json(updatedCount, { status: 200 });
         const { data: newLog, error: logError } = await setLogs(
           logs,
           applicationId

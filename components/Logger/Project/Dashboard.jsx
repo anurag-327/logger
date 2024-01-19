@@ -9,9 +9,8 @@ import { useRouter } from "next/navigation";
 
 const ApplicationDashboard = ({ credentials, setCredentials }) => {
   return (
-    <div className="sm:px-8 px-2 sm:shadow-md bg-white  mx-auto  border-none sm:border rounded-none sm:rounded-xl border-gray-300 overflow-hidden py-8 w-[100%] sm:max-w-5xl mt-10  justify-center items-start flex-col gap-3">
+    <div className="md:px-6 px-2  bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-3">
       <Toaster position="top-right" reverseOrder />
-
       <ApplicationCredentials credentials={credentials} />
       <GeneralCredentials
         credentials={credentials}
@@ -33,7 +32,7 @@ function ApplicationCredentials({ credentials }) {
         </h2>
         <div className="px-2 py-2 overflow-auto whitespace-pre-wrap rounded-lg ">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-base font-[600] ">Client ID</h3>
+            <h3 className="text-base font-[600] ">Application Id</h3>
             <CopyToClipboard
               text={credentials.id}
               onCopy={() => toast.success("copied")}
@@ -86,7 +85,7 @@ function GeneralCredentials({ credentials, setCredentials }) {
     setLoading(true);
     const { error } = await supabase
       .from("projects")
-      .update({ name: data.name, credentialsURL: data.credentialsURL })
+      .update({ name: data.name, projectURL: data.credentialsURL })
       .eq("id", credentials.id);
     if (error) {
       setLoading(false);
@@ -112,7 +111,7 @@ function GeneralCredentials({ credentials, setCredentials }) {
         </h2>
         <div className="relative w-full mt-5 rounded-lg">
           <h3 className="font-[700] text-sm mb-1">
-            Credentials Name <span className="text-sm text-red-500">*</span>
+            Project Name <span className="text-sm text-red-500">*</span>
           </h3>
           <input
             type="text"
@@ -130,7 +129,7 @@ function GeneralCredentials({ credentials, setCredentials }) {
         </div>
         <div className="relative w-full mt-5 rounded-lg">
           <h3 className="text-sm font-[700] mb-1">
-            Credentials URL <span className="text-sm text-red-500">*</span>
+            Project URL <span className="text-sm text-red-500">*</span>
           </h3>
           <input
             type="url"
@@ -142,7 +141,7 @@ function GeneralCredentials({ credentials, setCredentials }) {
                 /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi,
             })}
             placeholder="https://quick-sign.vercel.app/"
-            defaultValue={credentials.credentialsURL}
+            defaultValue={credentials.projectURL}
             name="credentialsURL"
           />
           {errors.homepageURL && (

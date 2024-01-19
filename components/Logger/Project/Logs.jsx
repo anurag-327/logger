@@ -1,11 +1,18 @@
 import React from "react";
 import History from "./History";
+import { ListBullets } from "phosphor-react";
 
 function Logs({ logs, setLogs }) {
-  console.log(logs);
   return (
-    <div className="sm:px-8 px-2 sm:shadow-md bg-white  mx-auto  border-none sm:border rounded-none sm:rounded-xl border-gray-300 overflow-hidden py-8 w-[100%] sm:max-w-5xl mt-10  justify-center items-start flex-col gap-3">
-      <History logs={logs} />
+    <div className=" px-2 pl-0 md:px-0 md:pl-4 bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-3">
+      {logs.length > 0 ? (
+        <History logs={logs} />
+      ) : (
+        <div className="flex flex-col items-center justify-center h-full">
+          <ListBullets size={80} />
+          <span>No logs found</span>
+        </div>
+      )}
     </div>
   );
 }

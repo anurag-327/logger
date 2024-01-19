@@ -7,7 +7,7 @@ import Home from "@/components/Home/Home";
 import { useSearchParams } from "next/navigation";
 import { CaretUp, ChartBar, Globe, User, Users } from "phosphor-react";
 import Image from "next/image";
-import Playground from "@/components/UI/Playground";
+import Playground from "@/components/Playground/Playground";
 export default function page() {
   const router = useRouter();
   const [dropDown, setDropDown] = useState(false);

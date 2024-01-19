@@ -57,6 +57,8 @@ async function setLogs(logs, applicationId) {
       country: logs.country,
       city: logs.city,
       region: logs.region,
+      host: logs.host,
+      userAgent: logs.userAgent,
     })
     .select();
   return { data, error };

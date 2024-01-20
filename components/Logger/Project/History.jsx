@@ -6,7 +6,7 @@ import React, { useState } from "react";
 const History = ({ logs }) => {
   const [sidebar, setSidebar] = useState();
   const [page, setPage] = useState(1);
-  const [capacity, setCapacity] = useState(10);
+  const [capacity, setCapacity] = useState(20);
   function pagehandler(i) {
     if (i >= 1 && i <= Math.ceil(logs.length / capacity) && i != page)
       setPage(i);
@@ -26,78 +26,59 @@ const History = ({ logs }) => {
     );
   }
   return (
-    <div className="flex flex-row min-h-[80vh] pb-4 gap-2 overflow-auto md:overflow-hidden no-scrollbar">
+    <div className="flex flex-row min-h-[80vh] pb-4  overflow-auto md:overflow-hidden no-scrollbar">
       <Sidebar />
       <div className="flex flex-col justify-between w-full">
         <div>
-          <h2 className="text-2xl mt-6 ml-6 font-[450]">Logs</h2>
-          <table className="w-full mt-6 overflow-hidden text-sm bg-white divide-gray-200 h-fit">
-            <thead className="border-b-2">
-              <tr>
-                {/* <th className="sticky inset-y-0 px-4 py-3 bg-white start-0">
-                <label htmlFor="SelectAll" className="sr-only">
-                  Select All
-                </label>
-
-                <input
-                  type="checkbox"
-                  id="SelectAll"
-                  className="w-5 h-5 border-gray-300 rounded"
-                />
-              </th> */}
-                <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
-                  Time
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
-                  Country
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
-                  Region
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
-                  Browser
-                </th>
-              </tr>
-            </thead>
-
-            <tbody className="overflow-hidden divide-gray-200">
-              {logs
-                .slice(page * capacity - capacity, page * capacity)
-                .map((data, index) => (
-                  <tr
-                    onClick={() => setSidebar(data)}
-                    key={data.id}
-                    className={`${
-                      data === sidebar && "bg-orange-100"
-                    } py-4 overflow-hidden cursor-pointer hover:bg-orange-100`}
-                  >
-                    {/* <td className="sticky inset-y-0 px-4 py-3 bg-white start-0">
-                    <label className="sr-only" htmlFor="Row1">
-                      Row 1
-                    </label>
-
-                    <input
-                      className="w-5 h-5 ml-5 border-gray-300 rounded"
-                      type="checkbox"
-                      id="Row1"
-                    />
-                  </td> */}
-                    <td className="px-4 py-3 overflow-auto text-gray-800 whitespace-pre ">
-                      {timestamptoDate(data.created_at)}
-                    </td>
-                    <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
-                      {data.country}
-                    </td>
-                    <td className="px-4 py-3 overflow-hidden text-gray-800 whitespace-nowrap text- no-scrollbar ">
-                      {data.region}
-                    </td>
-                    <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
-                      {data.userAgent.browser.name || "N/A"}
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+          <div className="w-full px-4 py-4 bg-gray-100 border-t-2 border-l-2 border-r-2">
+            <h2 className="text-2xl mt-6 ml-6 font-[450]">Logs</h2>
+          </div>
+          <div className="px-4 mt-6">
+            <table className="w-full overflow-hidden text-sm bg-white divide-gray-200 h-fit">
+              <thead className="border-b-2">
+                <tr>
+                  <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                    Time
+                  </th>
+                  <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                    Country
+                  </th>
+                  <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                    Region
+                  </th>
+                  <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                    Browser
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="overflow-hidden divide-gray-200">
+                {logs
+                  .slice(page * capacity - capacity, page * capacity)
+                  .map((data, index) => (
+                    <tr
+                      onClick={() => setSidebar(data)}
+                      key={data.id}
+                      className={`${
+                        data === sidebar && "bg-orange-100"
+                      } py-4 overflow-hidden cursor-pointer hover:bg-orange-100`}
+                    >
+                      <td className="px-4 py-3 overflow-auto text-gray-800 whitespace-pre ">
+                        {timestamptoDate(data.created_at)}
+                      </td>
+                      <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
+                        {data.country}
+                      </td>
+                      <td className="px-4 py-3 overflow-hidden text-gray-800 whitespace-nowrap text- no-scrollbar ">
+                        {data.region}
+                      </td>
+                      <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
+                        {data.userAgent.browser.name || "N/A"}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div className="flex flex-col justify-between w-full gap-2 mt-8 md:flex-row ">
@@ -133,9 +114,9 @@ const History = ({ logs }) => {
             value={capacity}
             onChange={(e) => setCapacity(Number(e.target.value))}
           >
-            <option value={10}>10 entries/page</option>
             <option value={20}>20 entries/page</option>
             <option value={30}>30 entries/page</option>
+            <option value={50}>50 entries/page</option>
           </select>
         </div>
       </div>

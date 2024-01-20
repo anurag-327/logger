@@ -55,6 +55,12 @@ export const POST = async (req, res, context) => {
   }
 };
 export const GET = async (req, res, context) => {
-  console.log("Request recieved");
-  return NextResponse.json({ message: "Hii, From logger" }, { status: 200 });
+  return NextResponse.json(
+    {
+      message: "Hii, from logger",
+      note: "This Logger Api is depreciated now, we advice you using v1 of the api to register mange and access logs efficiently.",
+      newAPI: "https://logger-mocha-six.vercel.app/api/logger/v1",
+    },
+    { status: 200 }
+  );
 };

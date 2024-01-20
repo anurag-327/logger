@@ -11,9 +11,11 @@ const Stats = ({ logs, credentials }) => {
   const stats = segregateData(logs, credentials);
 
   return (
-    <div className=" px-2 md:px-0 md:pl-4 py-6  bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-6">
-      <h2 className="text-2xl font-[400] "># Stats & Insights</h2>
-      <div className="relative flex flex-col gap-1 mt-6">
+    <div className=" md:px-0 bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-6">
+      <div className="w-full px-4 py-8 bg-gray-100 border-t-2 border-l-2 border-r-2">
+        <h2 className="text-2xl font-[400] "># Stats & Insights</h2>
+      </div>
+      <div className="relative flex flex-col gap-1 pl-4 mt-6">
         <h2 className="text-lg font-[450]">Total Visitors</h2>
         <div className="flex items-center justify-center gap-4 p-2 bg-orange-200 rounded-md w-fit">
           <span className="flex items-center justify-center gap-1">
@@ -24,7 +26,7 @@ const Stats = ({ logs, credentials }) => {
         </div>
       </div>
 
-      <div className="relative flex flex-col mt-6">
+      <div className="relative flex flex-col pl-4 mt-6">
         <h2 className="text-lg font-[450]">Unique Visitors</h2>
         <div className="flex items-center justify-center gap-4 p-2 mt-1 bg-blue-200 rounded-md w-fit">
           <span className="flex items-center justify-center gap-1">

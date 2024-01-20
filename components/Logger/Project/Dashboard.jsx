@@ -6,10 +6,10 @@ import { Toaster, toast } from "react-hot-toast";
 import Header from "./Header";
 import { supabase } from "@/supabase/config";
 import { useRouter } from "next/navigation";
-
+import { v4 as uuidv4 } from "uuid";
 const ApplicationDashboard = ({ credentials, setCredentials }) => {
   return (
-    <div className="md:px-6 px-2  bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-3">
+    <div className="md:px-6 px-2 py-10  bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-3">
       <Toaster position="top-right" reverseOrder />
       <ApplicationCredentials credentials={credentials} />
       <GeneralCredentials
@@ -24,15 +24,37 @@ const ApplicationDashboard = ({ credentials, setCredentials }) => {
 export default ApplicationDashboard;
 
 function ApplicationCredentials({ credentials }) {
+  const [loading, setLoading] = useState(false);
+  const [clientSecret, setClientSecret] = useState(credentials.clientSecret);
+  async function updateClientSecret() {
+    setLoading(true);
+    const newclientSecret = uuidv4();
+    const { error } = await supabase
+      .from("projects")
+      .update({ clientSecret: newclientSecret })
+      .eq("id", credentials.id);
+
+    if (error) {
+      toast.error("Failed to Generate new secret");
+      setLoading(false);
+    } else {
+      toast.success("Client Secret updated");
+      setClientSecret(newclientSecret);
+      setLoading(false);
+    }
+  }
   return (
-    <div className="w-[100%] mt-10   sm:max-w-full mx-auto">
-      <div className="flex flex-col gap-4 px-4 py-4 border border-gray-300 rounded-md shadow-md">
-        <h2 className="flex gap-4 my-2 text-2xl font-bold text-start ">
-          # Application credentials
-        </h2>
-        <div className="px-2 py-2 overflow-auto whitespace-pre-wrap rounded-lg ">
+    <div className="w-[100%]  overflow-hidden  sm:max-w-full mx-auto">
+      <Toaster position="top-right" reverseOrder />
+      <div className="flex flex-col gap-4 border border-gray-300 rounded-md shadow-md">
+        <div className="w-full px-4 py-4 bg-gray-100">
+          <h2 className="flex gap-4 my-2 text-2xl font-[450] text-start ">
+            Application credentials
+          </h2>
+        </div>
+        <div className="px-4 py-2 overflow-auto whitespace-pre-wrap rounded-lg ">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-base font-[600] ">Application Id</h3>
+            <h3 className="text-base font-[450] ">Application Id</h3>
             <CopyToClipboard
               text={credentials.id}
               onCopy={() => toast.success("copied")}
@@ -42,18 +64,16 @@ function ApplicationCredentials({ credentials }) {
               </button>
             </CopyToClipboard>
           </div>
-          <input
-            readOnly
-            className="w-full px-3 py-2 overflow-visible text-sm border border-gray-300 rounded-md outline-none "
-            defaultValue={credentials.id}
-          />
+          <div className="w-full px-3 py-2 overflow-visible text-sm border border-gray-300 rounded-md outline-none ">
+            {credentials.id}
+          </div>
         </div>
-        <div className="px-2 py-2 overflow-auto whitespace-pre-wrap rounded-lg ">
+        <div className="px-4 py-2 overflow-auto whitespace-pre-wrap rounded-lg ">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-base font-[600] ">Client Secret</h3>
+            <h3 className="text-base font-[450] ">Client Secret</h3>
 
             <CopyToClipboard
-              text={credentials.clientSecret}
+              text={clientSecret}
               onCopy={() => toast.success("copied")}
             >
               <button>
@@ -61,11 +81,26 @@ function ApplicationCredentials({ credentials }) {
               </button>
             </CopyToClipboard>
           </div>
-          <input
-            readOnly
-            className="w-full px-3 py-2 overflow-visible text-sm border border-gray-300 rounded-md outline-none "
-            defaultValue={credentials.clientSecret}
-          />
+          <div className="w-full px-3 py-2 overflow-visible text-sm border border-gray-300 rounded-md outline-none ">
+            {clientSecret}
+          </div>
+          <div className="flex flex-col items-end w-full gap-1 mt-2 sm:justify-between sm:items-center sm:flex-row">
+            <span className="text-sm text-red-600 font-[450]">
+              *Generating new secret will invalidate the existing secret
+            </span>
+            {loading ? (
+              <div className="px-3 py-0.5 text-sm hover:bg-gray-200 border-2 rounded-md">
+                Generating..
+              </div>
+            ) : (
+              <button
+                onClick={updateClientSecret}
+                className="px-3 py-0.5 w-fit float-right text-sm hover:bg-gray-200 border-2 rounded-md"
+              >
+                Generate new key
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -104,13 +139,15 @@ function GeneralCredentials({ credentials, setCredentials }) {
       <form
         id="Form"
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col mt-10 border py-4 shadow-md rounded-md border-gray-300  px-3  w-[100%]  sm:max-w-full mx-auto "
+        className="flex flex-col overflow-hidden mt-10 pb-4 border  shadow-md rounded-md border-gray-300    w-[100%]  sm:max-w-full mx-auto "
       >
-        <h2 className="flex w-full gap-4 my-2 text-2xl font-bold text-center ">
-          # Application Details
-        </h2>
-        <div className="relative w-full mt-5 rounded-lg">
-          <h3 className="font-[700] text-sm mb-1">
+        <div className="w-full px-4 py-4 bg-gray-100">
+          <h2 className="flex w-full gap-4 my-2 text-2xl font-[450] text-center ">
+            Application Details
+          </h2>
+        </div>
+        <div className="relative w-full px-4 mt-5 rounded-lg">
+          <h3 className="font-[450] text-sm mb-1">
             Project Name <span className="text-sm text-red-500">*</span>
           </h3>
           <input
@@ -127,8 +164,8 @@ function GeneralCredentials({ credentials, setCredentials }) {
             </span>
           )}
         </div>
-        <div className="relative w-full mt-5 rounded-lg">
-          <h3 className="text-sm font-[700] mb-1">
+        <div className="relative w-full px-4 mt-5 rounded-lg">
+          <h3 className="text-sm font-[450] mb-1">
             Project URL <span className="text-sm text-red-500">*</span>
           </h3>
           <input
@@ -151,10 +188,10 @@ function GeneralCredentials({ credentials, setCredentials }) {
           )}
         </div>
 
-        <div className="mt-4">
+        <div className="px-4 mt-4">
           <button
             disabled={loading}
-            className={`w-full block border-none px-2 py-2 cursor-pointer ${
+            className={`w-full sm:w-fit float-right px-4 block border-none  py-1 cursor-pointer ${
               loading ? "bg-green-300" : "bg-blue-400 "
             } bg-blue-600 text-white text-lg font-semibold rounded-md`}
             type="Submit"
@@ -184,35 +221,39 @@ function DeleteApplication({ credentials }) {
     }
   }
   return (
-    <div className="w-[100%] sm:max-w-full mx-auto">
-      <div className="w-full px-4 py-6 mt-10 overflow-auto whitespace-pre-wrap border border-gray-300 rounded-lg shadow-md ">
+    <div className="w-[100%] overflow-hidden sm:max-w-full mx-auto">
+      <div className="w-full mt-10 overflow-auto whitespace-pre-wrap border border-gray-300 rounded-lg shadow-md ">
         <div className="w-full ">
-          <h3 className="mb-2 text-2xl font-bold "># Delete Credentials</h3>
-          <p className="my-4 text-sm text-center text-red-600 whitespace-pre-wrap">
-            Note! This is a destructive action continuing will delete your
-            credentials
-          </p>
-          <p className="text-sm">
-            Prompt{" "}
-            <span className="font-bold text-red-600 underline ">
-              delete/{credentials.name}
-            </span>{" "}
-            to delete credentials
-          </p>
-          <input
-            id="deleteBox"
-            value={deleteMessage}
-            type="text"
-            autoCorrect="off"
-            autoComplete="off"
-            onChange={(e) => setDeleteMessage(e.target.value)}
-            className="w-full px-3 py-2 mt-2 text-lg border border-gray-300 rounded-md outline-none"
-          />
+          <div className="w-full px-4 py-4 bg-gray-100">
+            <h3 className="mb-2 text-2xl font-[450] ">Delete Application</h3>
+          </div>
+          <div className="px-4 pb-4">
+            <p className="my-4 text-sm text-center text-red-600 whitespace-pre-wrap">
+              Note! This is a destructive action continuing will delete your
+              credentials
+            </p>
+            <p className="text-sm">
+              Prompt{" "}
+              <span className="font-bold text-red-600 underline ">
+                delete/{credentials.name}
+              </span>{" "}
+              to delete credentials
+            </p>
+            <input
+              id="deleteBox"
+              value={deleteMessage}
+              type="text"
+              autoCorrect="off"
+              autoComplete="off"
+              onChange={(e) => setDeleteMessage(e.target.value)}
+              className="w-full px-3 py-2 mt-2 text-lg border border-gray-300 rounded-md outline-none"
+            />
+          </div>
         </div>
         {deleteMessage === `delete/${credentials.name}` && (
           <button
             onClick={deleteAccount}
-            className={` text-white mt-4 rounded-md mr-4 float-right px-3 py-2 ${
+            className={` text-white my-2 rounded-md mr-4 float-right px-3 py-2 ${
               deleteLoading ? "bg-red-200" : "bg-red-600"
             }`}
           >

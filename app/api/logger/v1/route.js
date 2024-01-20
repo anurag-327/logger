@@ -2,8 +2,14 @@ import { supabase } from "@/supabase/config";
 import { NextResponse, NextRequest } from "next/server";
 
 export const GET = async (req, res) => {
-  const data = JSON.parse(req.headers.get("x-logger-data"));
-  return NextResponse.json(data, { status: 200 });
+  return NextResponse.json(
+    {
+      message: "Hii, from logger",
+      note: "Visit logger playground to get started with logger.",
+      playground: "https://logger-mocha-six.vercel.app/playground",
+    },
+    { status: 200 }
+  );
 };
 export const POST = async (req, res, context) => {
   try {
@@ -24,6 +30,7 @@ export const POST = async (req, res, context) => {
         if (!error && !logError) {
           return NextResponse.json(updatedCount, { status: 200 });
         } else {
+          console.log(error, logError);
           return sendErrorResponse("Failed to update", 500);
         }
       } else {
@@ -63,6 +70,7 @@ async function setLogs(logs, applicationId) {
       userAgent: logs.userAgent,
       ua: logs.ua,
       referer: logs.referer,
+      expires_at: getExpiryDate(),
     })
     .select();
   return { data, error };
@@ -76,6 +84,17 @@ async function updatecount(count, applicationId) {
 }
 function sendErrorResponse(error, status) {
   return NextResponse.json({ error: error }, { status: status });
+}
+
+function getExpiryDate() {
+  const currentDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1; // Months are zero-based
+  const day = currentDate.getDate();
+  const date = `${year}-${month < 10 ? "0" : ""}${month}-${
+    day < 10 ? "0" : ""
+  }${day}`;
+  return date;
 }
 
 //

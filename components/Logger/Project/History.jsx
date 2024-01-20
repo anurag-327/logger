@@ -1,5 +1,13 @@
-import { Plus, X } from "@phosphor-icons/react";
+import {
+  ClockAfternoon,
+  ClockCountdown,
+  File,
+  HourglassSimpleMedium,
+  Plus,
+  X,
+} from "@phosphor-icons/react";
 import { Notepad } from "@phosphor-icons/react/dist/ssr";
+import { Globe, LineSegments, Path } from "phosphor-react";
 
 import React, { useState } from "react";
 
@@ -13,7 +21,7 @@ const History = ({ logs }) => {
   }
   function Sidebar() {
     return (
-      <div className="order-2 w-[90%] sm:w-[400px] right-0 bg-white absolute xl:static  p-2 border-l ">
+      <div className="order-2 w-[90%] sm:w-[400px] right-0 bg-gray-50 absolute xl:static  p-2 border-l ">
         {!sidebar ? (
           <div className="flex-col items-center justify-center hidden h-full xl:flex">
             <Notepad size={30} />
@@ -47,6 +55,9 @@ const History = ({ logs }) => {
                     Region
                   </th>
                   <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                    Path
+                  </th>
+                  <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
                     Browser
                   </th>
                 </tr>
@@ -59,19 +70,36 @@ const History = ({ logs }) => {
                       onClick={() => setSidebar(data)}
                       key={data.id}
                       className={`${
-                        data === sidebar && "bg-orange-100"
-                      } py-4 overflow-hidden cursor-pointer hover:bg-orange-100`}
+                        data === sidebar && "bg-yellow-100"
+                      } py-4 overflow-hidden cursor-pointer hover:bg-yellow-100 shadow-sm`}
                     >
-                      <td className="px-4 py-3 overflow-auto text-gray-800 whitespace-pre ">
+                      <td className="px-4 py-4 overflow-auto text-gray-800 whitespace-pre ">
+                        <ClockAfternoon
+                          className="inline-block mr-2 text-black"
+                          size={22}
+                        />
                         {timestamptoDate(data.created_at)}
                       </td>
-                      <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
+                      <td className="px-4 py-4 text-gray-800 whitespace-nowrap">
+                        <Globe
+                          className="inline-block mr-2 text-blue-500"
+                          size={22}
+                        />
                         {data.country}
                       </td>
-                      <td className="px-4 py-3 overflow-hidden text-gray-800 whitespace-nowrap text- no-scrollbar ">
+                      <td className="px-4 py-4 overflow-hidden text-gray-800 whitespace-nowrap text- no-scrollbar ">
                         {data.region}
                       </td>
-                      <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
+                      <td className="px-4 py-4 max-w-[100px] overflow-scroll no-scrollbar text-gray-800 whitespace-nowrap">
+                        <LineSegments
+                          className="inline-block mr-2 text-yellow-500"
+                          size={22}
+                          weight="bold"
+                        />
+
+                        {data.path || "/"}
+                      </td>
+                      <td className="px-4 py-4 text-gray-800 whitespace-nowrap">
                         {data.userAgent.browser.name || "N/A"}
                       </td>
                     </tr>
@@ -152,28 +180,25 @@ function Logdata({ data, setSidebar }) {
         </div>
         <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
           <span className="text-gray-500 hover:text-black font-[450]">
-            Host
-          </span>
-          <span className="overflow-auto no-scrollbar">{data.host}</span>
-        </div>
-        <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
-          <span className="text-gray-500 hover:text-black font-[450]">
             Referer
           </span>
           <span className="overflow-auto no-scrollbar">
             {data.referer || "N/A"}
           </span>
         </div>
-        <div className="flex justify-between gap-4 px-2 py-2 border-b-2">
+        <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
           <span className="text-gray-500 hover:text-black font-[450]">
-            Browser
+            Path
           </span>
-          <span>{data.userAgent.browser.name || "N/A"}</span>
+          <span className="overflow-auto no-scrollbar">{data.path || "/"}</span>
         </div>
-        <div className="flex justify-between gap-4 px-2 py-2 border-b-2">
-          <span className="text-gray-500 hover:text-black font-[450]">OS</span>
-          <span>{data.userAgent.os.name || "N/A"}</span>
+        <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
+          <span className="text-gray-500 hover:text-black font-[450]">
+            Host
+          </span>
+          <span className="overflow-auto no-scrollbar">{data.host}</span>
         </div>
+
         <div className="flex justify-between gap-4 px-2 py-2 border-b-2">
           <span className="text-gray-500 hover:text-black font-[450]">IP</span>
           <span>{data.ip}</span>
@@ -195,6 +220,16 @@ function Logdata({ data, setSidebar }) {
             City
           </span>
           <span>{data.city}</span>
+        </div>
+        <div className="flex justify-between gap-4 px-2 py-2 border-b-2">
+          <span className="text-gray-500 hover:text-black font-[450]">
+            Browser
+          </span>
+          <span>{data.userAgent.browser.name || "N/A"}</span>
+        </div>
+        <div className="flex justify-between gap-4 px-2 py-2 border-b-2">
+          <span className="text-gray-500 hover:text-black font-[450]">OS</span>
+          <span>{data.userAgent.os.name || "N/A"}</span>
         </div>
         <div className="flex justify-between w-full gap-4 py-2 pr-2 ">
           <span className="text-gray-500 px-2  bg-white hover:text-black font-[450]">

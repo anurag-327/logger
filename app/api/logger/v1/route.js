@@ -71,6 +71,7 @@ async function setLogs(logs, applicationId) {
       ua: logs.ua,
       referer: logs.referer,
       expires_at: getExpiryDate(),
+      path: getPath(logs.referer),
     })
     .select();
   return { data, error };
@@ -95,6 +96,16 @@ function getExpiryDate() {
     day < 10 ? "0" : ""
   }${day}`;
   return date;
+}
+
+function getPath(url) {
+  try {
+    const parsedUrl = new URL(url);
+    const path = parsedUrl.pathname;
+    return path;
+  } catch (error) {
+    return "/";
+  }
 }
 
 //

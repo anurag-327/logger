@@ -34,11 +34,9 @@ Logger is your partner for counting visitors with ease, offering insights withou
    },
    body:JSON.stringify({applicationId:<Application ClientId>, clientSecret:<Application Secret>})
    }
-   const response=await fetch("https://logger-mocha-six.vercel.app/api/logger",body);
+   const response=await fetch("https://logger-mocha-six.vercel.app/api/logger/v1",body);
    const data=await response.json();
    ```
-
-![image](https://github.com/anurag-327/logger/assets/98267696/21fd4928-3dc2-48f2-8192-26f53080e64c)
 
 1. **Response schema**
 
@@ -51,7 +49,7 @@ Logger is your partner for counting visitors with ease, offering insights withou
 2-BAD RESPONSE
 {
   error: <ERROR>
-  message:<ERROR MESSAGE>
+
 }
 ```
 

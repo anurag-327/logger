@@ -78,10 +78,10 @@ const Header = () => {
                 <Question size={18} weight="regular" />
                 Playground
               </a>
-              {/* <a href="/account" className="flex items-center gap-1">
+              <a href="/account" className="flex items-center gap-1">
                 <Gear size={18} weight="regular" />
                 Account
-              </a> */}
+              </a>
               <button
                 onClick={handleSignOut}
                 className="flex items-center gap-1"

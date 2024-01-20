@@ -46,11 +46,7 @@ export default function Login() {
       setError(err.message);
     }
   }
-  async function handleReset() {
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://logger-mocha-six.vercel.app/reset-password",
-    });
-  }
+
   useEffect(() => {
     if (user != null) {
       if (callback_url) router.push(callback_url);

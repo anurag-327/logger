@@ -91,10 +91,9 @@ const History = ({ logs }) => {
                         {data.region}
                       </td>
                       <td className="px-4 py-4 max-w-[100px] overflow-scroll no-scrollbar text-gray-800 whitespace-nowrap">
-                        <LineSegments
+                        <File
                           className="inline-block mr-2 text-yellow-500"
                           size={22}
-                          weight="bold"
                         />
 
                         {data.path || "/"}
@@ -186,7 +185,7 @@ function Logdata({ data, setSidebar }) {
             {data.referer || "N/A"}
           </span>
         </div>
-        <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
+        <div className="flex justify-between gap-4 px-2 py-2 border-b-2">
           <span className="text-gray-500 hover:text-black font-[450]">
             Path
           </span>

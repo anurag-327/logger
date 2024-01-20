@@ -76,7 +76,7 @@ export default function VerifyEmailAddress() {
               renderSeparator={<span>&nbsp; - &nbsp; </span>}
               renderInput={(props) => <input {...props} />}
               containerStyle=""
-              inputStyle="border mb-2 outline-none resize-none dark:text-black border-gray-300 rounded-sm"
+              inputStyle="border mt-1 mb-2 outline-none resize-none dark:text-black border-gray-300 rounded-sm"
             />
           </div>
           {verificationError && (

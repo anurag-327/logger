@@ -46,6 +46,11 @@ export default function Login() {
       setError(err.message);
     }
   }
+  async function handleReset() {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "https://logger-mocha-six.vercel.app/reset-password",
+    });
+  }
   useEffect(() => {
     if (user != null) {
       if (callback_url) router.push(callback_url);
@@ -117,7 +122,7 @@ export default function Login() {
             />
             {errors.password && (
               <span className="font-semibold text-red-800">
-                Your Password must contain 8 or more characters
+                Password must contain 8 or more characters
               </span>
             )}
           </div>
@@ -136,15 +141,20 @@ export default function Login() {
               {!loading ? "Continue" : "Logging In"}
             </button>
           </div>
-          <div className="mt-5 text-sm text-center ">
-            <p>
-              Didn't have any account?{" "}
-              <a href="/signup" className="text-blue-800 underline ">
-                Sign Up
-              </a>
-            </p>
-          </div>
         </form>
+        <div className="flex justify-center w-full">
+          <a href="/reset" className="mx-auto text-sm text-blue-800 underline ">
+            Forgot Password
+          </a>
+        </div>
+        <div className="mt-1 text-sm text-center ">
+          <p>
+            Didn't have any account?{" "}
+            <a href="/signup" className="text-blue-800 underline ">
+              Sign Up
+            </a>
+          </p>
+        </div>
       </div>
     </main>
   );

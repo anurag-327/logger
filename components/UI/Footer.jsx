@@ -12,7 +12,7 @@ const Footer = () => {
     <footer className="flex items-center justify-between w-full px-4 py-6 sm:px-10 text-start ">
       <span>Logger © 2024</span>
       <div className="flex items-center gap-2 ">
-        <a href="https://github.com/anurag-327" target="blank">
+        <a href="https://github.com/anurag-327/logger" target="blank">
           <GithubLogo size={25} className="" />
         </a>
         <a href="https://linkedin.com/in/anuragsr327/" target="blank">

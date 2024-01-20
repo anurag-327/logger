@@ -99,46 +99,45 @@ const History = ({ logs }) => {
             </tbody>
           </table>
         </div>
-        {Math.ceil(logs.length / capacity) > 1 && (
-          <div className="flex flex-col justify-between w-full gap-2 mt-8 md:flex-row ">
-            <div className="flex justify-center w-full gap-2 md:ml-20 ">
-              <span
-                onClick={() => pagehandler(page - 1)}
-                className="px-3 py-1 border rounded-md cursor-pointer"
-              >
-                Prev
-              </span>
-              {[...Array(Math.ceil(logs.length / capacity))].map((_, i) => {
-                return (
-                  <span
-                    key={i + 1}
-                    onClick={() => setPage(i + 1)}
-                    className={`${
-                      page == i + 1 && "bg-gray-300"
-                    } px-3 py-1 border cursor-pointer rounded-md`}
-                  >
-                    {i + 1}
-                  </span>
-                );
-              })}
-              <span
-                onClick={() => pagehandler(page + 1)}
-                className="px-3 py-1 border rounded-md cursor-pointer"
-              >
-                Next
-              </span>
-            </div>
-            <select
-              className="px-2 mx-auto text-sm border rounded-md outline-none resize-none w-fit "
-              value={capacity}
-              onChange={(e) => setCapacity(Number(e.target.value))}
+
+        <div className="flex flex-col justify-between w-full gap-2 mt-8 md:flex-row ">
+          <div className="flex justify-center w-full gap-2 md:ml-20 ">
+            <span
+              onClick={() => pagehandler(page - 1)}
+              className="px-3 py-1 border rounded-md cursor-pointer"
             >
-              <option value={10}>10 entries/page</option>
-              <option value={20}>20 entries/page</option>
-              <option value={30}>30 entries/page</option>
-            </select>
+              Prev
+            </span>
+            {[...Array(Math.ceil(logs.length / capacity))].map((_, i) => {
+              return (
+                <span
+                  key={i + 1}
+                  onClick={() => setPage(i + 1)}
+                  className={`${
+                    page == i + 1 && "bg-gray-300"
+                  } px-3 py-1 border cursor-pointer rounded-md`}
+                >
+                  {i + 1}
+                </span>
+              );
+            })}
+            <span
+              onClick={() => pagehandler(page + 1)}
+              className="px-3 py-1 border rounded-md cursor-pointer"
+            >
+              Next
+            </span>
           </div>
-        )}
+          <select
+            className="px-2 mx-auto text-sm border rounded-md outline-none resize-none w-fit "
+            value={capacity}
+            onChange={(e) => setCapacity(Number(e.target.value))}
+          >
+            <option value={10}>10 entries/page</option>
+            <option value={20}>20 entries/page</option>
+            <option value={30}>30 entries/page</option>
+          </select>
+        </div>
       </div>
     </div>
   );

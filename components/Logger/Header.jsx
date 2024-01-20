@@ -78,9 +78,9 @@ const Header = () => {
                 <Question size={18} weight="regular" />
                 Playground
               </a>
-              <a href="/accounts" className="flex items-center gap-1">
+              <a href="/account" className="flex items-center gap-1">
                 <Gear size={18} weight="regular" />
-                Accounts
+                Account
               </a>
               <button
                 onClick={handleSignOut}

@@ -13,7 +13,7 @@ const History = ({ logs }) => {
   }
   function Sidebar() {
     return (
-      <div className="order-2 w-[90%] sm:w-[350px] right-0 bg-white absolute xl:static  p-2 border-l ">
+      <div className="order-2 w-[90%] sm:w-[400px] right-0 bg-white absolute xl:static  p-2 border-l ">
         {!sidebar ? (
           <div className="flex-col items-center justify-center hidden h-full xl:flex">
             <Notepad size={30} />
@@ -26,14 +26,15 @@ const History = ({ logs }) => {
     );
   }
   return (
-    <div className="flex flex-row min-h-[55vh] pb-6 gap-2 overflow-auto md:overflow-hidden no-scrollbar">
+    <div className="flex flex-row min-h-[80vh] pb-4 gap-2 overflow-auto md:overflow-hidden no-scrollbar">
       <Sidebar />
-      <div className="w-full">
-        <h2 className="text-2xl mt-6 ml-6 font-[450]">Logs</h2>
-        <table className="w-full mt-6 overflow-hidden text-sm bg-white divide-gray-200 h-fit">
-          <thead className="border-b-2">
-            <tr>
-              {/* <th className="sticky inset-y-0 px-4 py-3 bg-white start-0">
+      <div className="flex flex-col justify-between w-full">
+        <div>
+          <h2 className="text-2xl mt-6 ml-6 font-[450]">Logs</h2>
+          <table className="w-full mt-6 overflow-hidden text-sm bg-white divide-gray-200 h-fit">
+            <thead className="border-b-2">
+              <tr>
+                {/* <th className="sticky inset-y-0 px-4 py-3 bg-white start-0">
                 <label htmlFor="SelectAll" className="sr-only">
                   Select All
                 </label>
@@ -44,33 +45,33 @@ const History = ({ logs }) => {
                   className="w-5 h-5 border-gray-300 rounded"
                 />
               </th> */}
-              <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
-                Time
-              </th>
-              <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
-                Country
-              </th>
-              <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
-                Region
-              </th>
-              <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
-                Browser
-              </th>
-            </tr>
-          </thead>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                  Time
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                  Country
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                  Region
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start whitespace-nowrap">
+                  Browser
+                </th>
+              </tr>
+            </thead>
 
-          <tbody className="overflow-hidden divide-gray-200">
-            {logs
-              .slice(page * capacity - capacity, page * capacity)
-              .map((data, index) => (
-                <tr
-                  onClick={() => setSidebar(data)}
-                  key={data.id}
-                  className={`${
-                    data === sidebar && "bg-orange-100"
-                  } py-4 overflow-hidden cursor-pointer hover:bg-orange-100`}
-                >
-                  {/* <td className="sticky inset-y-0 px-4 py-3 bg-white start-0">
+            <tbody className="overflow-hidden divide-gray-200">
+              {logs
+                .slice(page * capacity - capacity, page * capacity)
+                .map((data, index) => (
+                  <tr
+                    onClick={() => setSidebar(data)}
+                    key={data.id}
+                    className={`${
+                      data === sidebar && "bg-orange-100"
+                    } py-4 overflow-hidden cursor-pointer hover:bg-orange-100`}
+                  >
+                    {/* <td className="sticky inset-y-0 px-4 py-3 bg-white start-0">
                     <label className="sr-only" htmlFor="Row1">
                       Row 1
                     </label>
@@ -81,60 +82,63 @@ const History = ({ logs }) => {
                       id="Row1"
                     />
                   </td> */}
-                  <td className="px-4 py-3 overflow-auto text-gray-800 whitespace-pre ">
-                    {data.time}
-                  </td>
-                  <td className="px-4 py-3 text-center text-gray-800 whitespace-nowrap">
-                    {data.country}
-                  </td>
-                  <td className="px-4 py-3 overflow-hidden text-center text-gray-800 whitespace-nowrap text- no-scrollbar ">
-                    {data.region}
-                  </td>
-                  <td className="px-4 py-3 text-center text-gray-800 whitespace-nowrap">
-                    {data.userAgent.browser.name || "N/A"}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-        <div className="flex flex-col justify-between w-full gap-2 mt-8 md:flex-row ">
-          <div className="flex justify-center w-full gap-2 ">
-            <span
-              onClick={() => pagehandler(page - 1)}
-              className="px-3 py-1 border rounded-md cursor-pointer"
-            >
-              Prev
-            </span>
-            {[...Array(Math.ceil(logs.length / capacity))].map((_, i) => {
-              return (
-                <span
-                  key={i + 1}
-                  onClick={() => setPage(i + 1)}
-                  className={`${
-                    page == i + 1 && "bg-gray-300"
-                  } px-3 py-1 border cursor-pointer rounded-md`}
-                >
-                  {i + 1}
-                </span>
-              );
-            })}
-            <span
-              onClick={() => pagehandler(page + 1)}
-              className="px-3 py-1 border rounded-md cursor-pointer"
-            >
-              Next
-            </span>
-          </div>
-          <select
-            className="px-2 mx-auto text-sm border rounded-md outline-none resize-none w-fit "
-            value={capacity}
-            onChange={(e) => setCapacity(Number(e.target.value))}
-          >
-            <option value={10}>10 entries/page</option>
-            <option value={20}>20 entries/page</option>
-            <option value={30}>30 entries/page</option>
-          </select>
+                    <td className="px-4 py-3 overflow-auto text-gray-800 whitespace-pre ">
+                      {timestamptoDate(data.created_at)}
+                    </td>
+                    <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
+                      {data.country}
+                    </td>
+                    <td className="px-4 py-3 overflow-hidden text-gray-800 whitespace-nowrap text- no-scrollbar ">
+                      {data.region}
+                    </td>
+                    <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
+                      {data.userAgent.browser.name || "N/A"}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </div>
+        {Math.ceil(logs.length / capacity) > 1 && (
+          <div className="flex flex-col justify-between w-full gap-2 mt-8 md:flex-row ">
+            <div className="flex justify-center w-full gap-2 md:ml-20 ">
+              <span
+                onClick={() => pagehandler(page - 1)}
+                className="px-3 py-1 border rounded-md cursor-pointer"
+              >
+                Prev
+              </span>
+              {[...Array(Math.ceil(logs.length / capacity))].map((_, i) => {
+                return (
+                  <span
+                    key={i + 1}
+                    onClick={() => setPage(i + 1)}
+                    className={`${
+                      page == i + 1 && "bg-gray-300"
+                    } px-3 py-1 border cursor-pointer rounded-md`}
+                  >
+                    {i + 1}
+                  </span>
+                );
+              })}
+              <span
+                onClick={() => pagehandler(page + 1)}
+                className="px-3 py-1 border rounded-md cursor-pointer"
+              >
+                Next
+              </span>
+            </div>
+            <select
+              className="px-2 mx-auto text-sm border rounded-md outline-none resize-none w-fit "
+              value={capacity}
+              onChange={(e) => setCapacity(Number(e.target.value))}
+            >
+              <option value={10}>10 entries/page</option>
+              <option value={20}>20 entries/page</option>
+              <option value={30}>30 entries/page</option>
+            </select>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -164,13 +168,21 @@ function Logdata({ data, setSidebar }) {
           <span className="text-gray-500 hover:text-black font-[450]">
             Time
           </span>
-          <span className="">{data.time}</span>
+          <span className="">{timestamptoDate(data.created_at)}</span>
         </div>
         <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
           <span className="text-gray-500 hover:text-black font-[450]">
             Host
           </span>
           <span className="overflow-auto no-scrollbar">{data.host}</span>
+        </div>
+        <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
+          <span className="text-gray-500 hover:text-black font-[450]">
+            Referer
+          </span>
+          <span className="overflow-auto no-scrollbar">
+            {data.referer || "N/A"}
+          </span>
         </div>
         <div className="flex justify-between gap-4 px-2 py-2 border-b-2">
           <span className="text-gray-500 hover:text-black font-[450]">
@@ -213,4 +225,8 @@ function Logdata({ data, setSidebar }) {
       </div>
     </div>
   );
+}
+
+function timestamptoDate(timestamp) {
+  return new Date(timestamp).toString().replace(/\(.*\)/, "");
 }

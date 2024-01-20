@@ -14,7 +14,7 @@ const page = ({ params }) => {
   const [notfound, setNotfound] = useState(false);
   const [error, setError] = useState(false);
   const [errormsg, setErrormsg] = useState("");
-  const [section, setSection] = useState("stats");
+  const [section, setSection] = useState("logs");
   const [credentials, setCredentials] = useState();
   const [logs, setLogs] = useState();
   const router = useRouter();
@@ -36,9 +36,7 @@ const page = ({ params }) => {
           )
         );
       default:
-        return (
-          logs && credentials && <Stats logs={logs} credentials={credentials} />
-        );
+        return logs && <Logs logs={logs} setLogs={setLogs} />;
     }
   }
   useEffect(() => {

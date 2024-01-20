@@ -12,7 +12,7 @@ const Stats = ({ logs, credentials }) => {
 
   return (
     <div className=" px-2 md:px-0 md:pl-4 py-6  bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-6">
-      <h2 className="text-3xl font-[400] "># Stats & Insights</h2>
+      <h2 className="text-2xl font-[400] "># Stats & Insights</h2>
       <div className="relative flex flex-col gap-1 mt-6">
         <h2 className="text-lg font-[450]">Total Visitors</h2>
         <div className="flex items-center justify-center gap-4 p-2 bg-orange-200 rounded-md w-fit">
@@ -24,7 +24,7 @@ const Stats = ({ logs, credentials }) => {
         </div>
       </div>
 
-      <div className="relative flex flex-col gap-1 mt-6">
+      <div className="relative flex flex-col mt-6">
         <h2 className="text-lg font-[450]">Unique Visitors</h2>
         <div className="flex items-center justify-center gap-4 p-2 mt-1 bg-blue-200 rounded-md w-fit">
           <span className="flex items-center justify-center gap-1">
@@ -43,6 +43,7 @@ const Stats = ({ logs, credentials }) => {
         <ChartByDate logs={logs} />
         <ChartByCity data={stats.logsCountByCity} />
         <ChartByCountry data={stats.logsCountByCountry} />
+        {/* <ResetCount credentials={credentials} /> */}
       </div>
     </div>
   );
@@ -181,4 +182,8 @@ function ChartByDate({ logs }) {
       <Line data={options} />
     </div>
   );
+}
+
+function ResetCount({ credentials }) {
+  return <button className="p-1 bg-red-300 rounded-md">Reset Count</button>;
 }

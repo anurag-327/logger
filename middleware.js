@@ -14,6 +14,7 @@ export default function middleware(request, res, next) {
   const requestHeaders = new Headers(request.headers);
   const userAgent = requestHeaders.get("user-agent");
   const host = requestHeaders.get("host");
+  const referrer = request.referer || request.referrer;
   const parsedUA = parseUserAgent(userAgent);
   const data = {
     ip: ip,
@@ -26,6 +27,7 @@ export default function middleware(request, res, next) {
     userAgent: parsedUA,
     ua: userAgent,
     host: host,
+    referer: requestHeaders.get("referer"),
   };
 
   requestHeaders.set("x-logger-data", JSON.stringify(data));

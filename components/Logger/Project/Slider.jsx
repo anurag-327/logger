@@ -13,15 +13,6 @@ const Slider = ({ section, setSection }) => {
     >
       <div className="flex flex-col items-start justify-start gap-2 ">
         <button
-          onClick={() => setSection("stats")}
-          className={`${
-            section == "stats" && "bg-gray-200"
-          } flex w-full  gap-1 p-3 rounded-md hover:bg-gray-100`}
-        >
-          <ChartLine size={25} />
-          Stats
-        </button>
-        <button
           onClick={() => setSection("logs")}
           className={`${
             section == "logs" && "bg-gray-200"
@@ -30,7 +21,15 @@ const Slider = ({ section, setSection }) => {
           <Notebook size={25} />
           Logs
         </button>
-
+        <button
+          onClick={() => setSection("stats")}
+          className={`${
+            section == "stats" && "bg-gray-200"
+          } flex w-full  gap-1 p-3 rounded-md hover:bg-gray-100`}
+        >
+          <ChartLine size={25} />
+          Stats
+        </button>
         <button
           onClick={() => setSection("credentials")}
           className={`${

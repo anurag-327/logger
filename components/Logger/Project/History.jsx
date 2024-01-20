@@ -152,18 +152,25 @@ function Logdata({ data, setSidebar }) {
         </div>
         <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
           <span className="text-gray-500 hover:text-black font-[450]">
-            Host
-          </span>
-          <span className="overflow-auto no-scrollbar">{data.host}</span>
-        </div>
-        <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
-          <span className="text-gray-500 hover:text-black font-[450]">
             Referer
           </span>
           <span className="overflow-auto no-scrollbar">
             {data.referer || "N/A"}
           </span>
         </div>
+        <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
+          <span className="text-gray-500 hover:text-black font-[450]">
+            Path
+          </span>
+          <span className="overflow-auto no-scrollbar">{data.path || "/"}</span>
+        </div>
+        <div className="flex justify-between gap-4 px-2 py-2 border-b-2 ">
+          <span className="text-gray-500 hover:text-black font-[450]">
+            Host
+          </span>
+          <span className="overflow-auto no-scrollbar">{data.host}</span>
+        </div>
+
         <div className="flex justify-between gap-4 px-2 py-2 border-b-2">
           <span className="text-gray-500 hover:text-black font-[450]">
             Browser

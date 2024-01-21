@@ -1,6 +1,6 @@
 "use client";
 import Header from "@/components/Home/Header";
-import Showcase from "@/components/Playground/ShowCase";
+import Showcase from "@/components/Playground/Showcase";
 
 import Sidebar from "@/components/Playground/Sidebar";
 import { List, X } from "@phosphor-icons/react";

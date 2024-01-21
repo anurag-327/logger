@@ -11,7 +11,7 @@ const Stats = ({ logs, credentials }) => {
   const stats = segregateData(logs, credentials);
 
   return (
-    <div className=" md:px-0 bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-6">
+    <div className=" md:px-0 pb-8 bg-white  mx-auto  overflow-hidden w-[98%] md:ml-4 mt-4  justify-center items-start flex-col gap-6">
       <div className="w-full px-4 py-8 bg-gray-100 border-t-2 border-l-2 border-r-2">
         <h2 className="text-2xl font-[400] "># Stats & Insights</h2>
       </div>
@@ -62,6 +62,7 @@ function ChartByVisits({ totalVisitors, uniqueVisitors }) {
         borderColor: ["#003f5c", "#ffa600"],
         backgroundColor: ["#003f5c", "#ffa600"],
         data: [totalVisitors, uniqueVisitors],
+        barThickness: 30,
       },
     ],
   };
@@ -69,7 +70,7 @@ function ChartByVisits({ totalVisitors, uniqueVisitors }) {
     <div className="w-[100%] sm:w-[80%] p-4 rounded-md border mx-auto">
       <h2 className="my-6 text-2xl font-[450] text-center">Visitors</h2>
       <div className=" w-[80%] mx-auto sm:w-[50%]">
-        <Pie data={options} />
+        <Bar data={options} />
       </div>
       <div className="flex flex-col gap-2 mt-4 text-xs">
         <span>
@@ -106,7 +107,7 @@ function ChartByCity({ data }) {
   return (
     <div className="w-[100%] sm:w-[80%] p-4 rounded-md border mx-auto">
       <h2 className="my-6 text-2xl font-[450] text-center">Visitors by city</h2>
-      <div className=" w-[80%] mx-auto md:w-[50%]">
+      <div className=" w-[80%] mx-auto md:w-[40%]">
         <Pie data={options} />
       </div>
     </div>
@@ -137,7 +138,7 @@ function ChartByCountry({ data }) {
       <h2 className="my-6 text-2xl font-[450] text-center">
         Visitors by country
       </h2>
-      <div className=" w-[80%] mx-auto md:w-[50%]">
+      <div className=" w-[80%] mx-auto md:w-[40%]">
         <Pie data={options} />
       </div>
     </div>
@@ -181,7 +182,9 @@ function ChartByDate({ logs }) {
           <option value={30}>last 1 Month</option>
         </select>
       </div>
-      <Line data={options} />
+      <div className=" w-[100%] mx-auto md:w-[90%] flex justify-center mt-10">
+        <Line data={options} />
+      </div>
     </div>
   );
 }

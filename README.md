@@ -1,62 +1,48 @@
-# Quick Sign
+# Logger
 
-Welcome to the Logger's documentation. This guide will help you how to use logger to track count of your visitors.
+Welcome to Logger, your partner for counting visitors with ease and gaining insights without intrusion. This tool allows you to track and analyze visitor data in real-time, providing valuable statistics for your projects.
 
-## Introduction to OAuth
+## Getting Started
 
-Logger is your partner for counting visitors with ease, offering insights without intrusion.
+Follow these steps to integrate Logger into your project:
 
-# **Getting Started**
+### Step 1: Register Your Application
 
-1. **Registering Your Application**
+1. Navigate to the Logger Dashboard by signing in to your account.
+2. Click on the "Add New Application" button.
+3. Fill in the required information for your application, including the name and application URL.
+4. Click "Create" to register your application.
+5. Once your application is created, you will be provided with an API key. This key is essential for making API requests.
 
-   1. Log in to Logger .
-   2. Create a new project by providing project's name and URL.
+### Step 2: Grab Your Credentials
 
-2. **Obtaining API Credentials**
-   Once you've registered your application, you will receive the following credentials:
+1. After creating your application, go to the "Projects" section in the Logger Dashboard.
+2. Locate your newly created application and copy the `applicationId` and `clientSecret` associated with it.
+3. Keep your credentials securely stored, as they are necessary for authenticating requests to the Logger API.
 
-   - applicationId: Unique identification for your your project
-   - clientSecret:
+### Step 3: Make a POST Request from Your Application
 
-# Implementation
+Now that you have registered your application and obtained your credentials, you can record visits and retrieve the latest statistics for your project.
 
-1. **Setting up Logger in your application**
+- **API Endpoint:** `https://logger-mocha-six.vercel.app/api/logger/v1`
+- **Request Body:**
+  ```json
+  {
+    "applicationId": "YOUR_APPLICATION_ID",
+    "clientSecret": "YOUR_CLIENT_SECRET"
+  }
+  ```
 
-   Make a post request to loggers's end point from your landing page with your credentials.
+### Step 4: API Returns Latest Stats and Records
 
-   ```jsx
-   // sample post request
-   const body={
-   method:"post",
-   headers:{
-   "content-type":"application/json",
-   },
-   body:JSON.stringify({applicationId:<Application ClientId>, clientSecret:<Application Secret>})
-   }
-   const response=await fetch("https://logger-mocha-six.vercel.app/api/logger/v1",body);
-   const data=await response.json();
-   ```
-
-1. **Response schema**
-
-```jsx
-1- OK Response
+```json
+// Success (200)
 {
-   visitors count
+    visitors
 }
 
-2-BAD RESPONSE
+// Error
 {
-  error: <ERROR>
-
+    "error": "error_description"
 }
-```
-
-# Contact
-
-If you encounter any issues or have questions about using Logger, please contact our support team at anuragsrivastav0027@gmail.com
-
-```
-
 ```

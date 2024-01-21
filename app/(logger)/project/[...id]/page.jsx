@@ -93,7 +93,13 @@ const page = ({ params }) => {
         <div className="mt-10 text-red-600">{errormsg}</div>
       ) : (
         <div className="bg-gray-100">
-          {credentials && <Header credentials={credentials} />}
+          {credentials && (
+            <Header
+              credentials={credentials}
+              setSection={setSection}
+              section={section}
+            />
+          )}
           <div className="flex flex-row ">
             <Slider setSection={setSection} section={section} />
             {displaySection()}

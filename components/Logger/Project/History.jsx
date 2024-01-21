@@ -21,9 +21,9 @@ const History = ({ logs }) => {
   }
   function Sidebar() {
     return (
-      <div className="order-2 w-[90%] sm:w-[400px] right-0 bg-gray-50 absolute xl:static  p-2 border-l ">
+      <div className="order-2 w-[90%] border-t-2 sm:w-[400px] right-0 bg-gray-50 absolute xl:static  p-2 border-l-2 ">
         {!sidebar ? (
-          <div className="flex-col items-center justify-center hidden h-full xl:flex">
+          <div className="flex-col items-center justify-center hidden h-[70vh] xl:flex">
             <Notepad size={30} />
             <span>Select a log to view details</span>
           </div>
@@ -34,12 +34,12 @@ const History = ({ logs }) => {
     );
   }
   return (
-    <div className="flex flex-row min-h-[80vh] pb-4  overflow-auto md:overflow-hidden no-scrollbar">
+    <div className="flex flex-row border-l-2 min-h-[80vh] pb-4  overflow-auto md:overflow-hidden no-scrollbar">
       <Sidebar />
       <div className="flex flex-col justify-between w-full">
         <div>
-          <div className="w-full px-4 py-4 bg-gray-100 border-t-2 border-l-2 border-r-2">
-            <h2 className="text-2xl mt-6 ml-6 font-[450]">Logs</h2>
+          <div className="w-full px-4 py-4 bg-gray-100 border-t-2 ">
+            <h2 className="text-3xl mt-6 ml-6 font-[450]">Logs</h2>
           </div>
           <div className="px-4 mt-6">
             <table className="w-full overflow-hidden text-sm bg-white divide-gray-200 h-fit">
@@ -70,8 +70,8 @@ const History = ({ logs }) => {
                       onClick={() => setSidebar(data)}
                       key={data.id}
                       className={`${
-                        data === sidebar && "bg-yellow-100"
-                      } py-4 overflow-hidden cursor-pointer hover:bg-yellow-100 shadow-sm`}
+                        data === sidebar && "bg-orange-100"
+                      } py-4 overflow-hidden cursor-pointer hover:bg-orange-100 shadow-sm`}
                     >
                       <td className="px-4 py-4 overflow-auto text-gray-800 whitespace-pre ">
                         <ClockAfternoon

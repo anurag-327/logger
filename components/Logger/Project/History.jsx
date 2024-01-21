@@ -21,9 +21,9 @@ const History = ({ logs }) => {
   }
   function Sidebar() {
     return (
-      <div className="order-2 w-[90%] border-t-2 sm:w-[400px] right-0 bg-gray-50 absolute xl:static  p-2 border-l-2 ">
+      <div className="order-2 w-[90%] border-t-2 sm:w-[400px] right-0 bg-gray-100 absolute xl:static  p-2 border-l-2 ">
         {!sidebar ? (
-          <div className="flex-col items-center justify-center hidden h-[70vh] xl:flex">
+          <div className="flex-col bg-gray-100 items-center justify-center hidden h-[70vh] xl:flex">
             <Notepad size={30} />
             <span>Select a log to view details</span>
           </div>

@@ -37,7 +37,7 @@ export default function Login() {
         console.log("Error", error);
       } else {
         setUser(data.user);
-        setLoading(false);
+        // setLoading(false);
         if (callback_url) router.push(callback_url);
         else router.push("/projects");
       }
@@ -46,12 +46,11 @@ export default function Login() {
       setError(err.message);
     }
   }
-
   useEffect(() => {
-    if (user != null) {
-      if (callback_url) router.push(callback_url);
-      else router.push("/projects");
-    }
+    (async function () {
+      const x = await supabase.auth.getSession();
+      if (x.data.session) router.push("/projects");
+    })();
   }, []);
   return (
     <main className="box-content flex flex-col items-center justify-center min-h-screen text-black font-poppins">

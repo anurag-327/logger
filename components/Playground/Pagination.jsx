@@ -1,6 +1,4 @@
 import { CaretLeft, CaretRight } from "@phosphor-icons/react/dist/ssr";
-import React from "react";
-
 const Pagination = ({ next, prev }) => {
   return (
     <div className="w-full">

@@ -108,8 +108,8 @@ const History = ({ logs }) => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-between w-full gap-2 mt-8 md:flex-row ">
-          <div className="flex justify-center w-full gap-2 md:ml-20 ">
+        <div className="flex flex-col justify-between w-full gap-2 px-2 mt-8 md:flex-row ">
+          <div className="flex flex-wrap justify-center w-full gap-2 ">
             <span
               onClick={() => pagehandler(page - 1)}
               className="px-3 py-1 border rounded-md cursor-pointer"
@@ -137,7 +137,7 @@ const History = ({ logs }) => {
             </span>
           </div>
           <select
-            className="px-2 mx-auto text-sm border rounded-md outline-none resize-none w-fit "
+            className="h-10 px-2 mx-auto text-sm border rounded-md outline-none resize-none w-fit "
             value={capacity}
             onChange={(e) => setCapacity(Number(e.target.value))}
           >

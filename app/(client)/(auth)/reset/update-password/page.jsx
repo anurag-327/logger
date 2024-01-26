@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { supabase } from "@/supabase/config";
 import { useRouter } from "next/navigation";
@@ -31,6 +31,12 @@ const page = () => {
       setError("Passwords Mismatch");
     }
   }
+  (async function () {
+    const x = await supabase.auth.getSession();
+    const y = await supabase.auth.getUser();
+    console.log(x, y);
+    if (!x.data.session) router.push("/");
+  })();
   return (
     <div className="w-full min-h-[90vh]">
       <Toaster position="top-right" reverseOrder />

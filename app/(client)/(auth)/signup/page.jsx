@@ -57,10 +57,10 @@ export default function Login() {
     }
   }
   useEffect(() => {
-    if (user != null) {
-      if (callback_url) router.push(callback_url);
-      else router.push("/");
-    }
+    (async function () {
+      const x = await supabase.auth.getSession();
+      if (x.data.session) router.push("/projects");
+    })();
   }, []);
   return (
     <main className="box-content flex flex-col items-center justify-center min-h-screen text-black font-poppins ">

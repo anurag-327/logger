@@ -1,5 +1,5 @@
-import Pagination from "@/components/Playground/Pagination";
 import { CaretRight } from "@phosphor-icons/react/dist/ssr";
+import Pagination from "@/components/Playground/Pagination";
 const Page = () => {
   return (
     <div className=" md:ml-[300px]  md:w-[calc(100%-340px)] w-full bg-white py-6">

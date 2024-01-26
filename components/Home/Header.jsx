@@ -1,3 +1,4 @@
+"use client";
 import { useStore } from "@/store/useStore";
 import { supabase } from "@/supabase/config";
 import { useRouter } from "next/navigation";

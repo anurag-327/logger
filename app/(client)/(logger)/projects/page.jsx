@@ -14,7 +14,6 @@ const page = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (user == null) router.push("/");
     (async function () {
       if (user != null) {
         const { data, error } = await supabase

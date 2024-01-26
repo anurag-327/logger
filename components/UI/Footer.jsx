@@ -1,11 +1,9 @@
 import React from "react";
 import {
   GithubLogo,
-  InstagramLogo,
   TwitterLogo,
   LinkedinLogo,
-  ReadCvLogo,
-} from "phosphor-react";
+} from "@phosphor-icons/react/dist/ssr";
 import { socials } from "@/data/data";
 const Footer = () => {
   return (

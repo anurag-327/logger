@@ -1,9 +1,8 @@
 "use client";
+
 import BarChart from "@/components/UI/Charts/BarChart";
 import PieChart from "@/components/UI/Charts/PieChart";
-import { CaretRight } from "@phosphor-icons/react/dist/ssr";
 import { useState } from "react";
-
 const page = () => {
   return (
     <div className=" md:ml-[300px] md:w-[calc(100%-340px)] w-full bg-white ">

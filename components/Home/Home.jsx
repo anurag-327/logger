@@ -1,8 +1,6 @@
-import { useStore } from "@/store/useStore";
-import { ArrowArcRight, ArrowBendRightDown, ArrowRight } from "phosphor-react";
-import { Socicons } from "socicons";
+import { ArrowArcRight } from "@phosphor-icons/react/dist/ssr";
+import Navigator from "./Navigator";
 const Home = () => {
-  const { user } = useStore();
   return (
     <div className="mt-32 sm:mt-40">
       <div className=" w-full mx-auto sm:max-w-[500px]">
@@ -26,21 +24,7 @@ const Home = () => {
             insights without intrusion.
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            className="flex items-center justify-center gap-2 px-4 py-1 text-sm text-white bg-black rounded-full w-fit"
-            href={user ? "/projects" : "/login"}
-          >
-            Configure your app
-          </a>
-          <a
-            className="flex items-center justify-center gap-2 px-4 py-1 text-sm border border-green-500 rounded-full w-fit"
-            href="/playground"
-          >
-            Playground
-            <ArrowRight size={20} />
-          </a>
-        </div>
+        <Navigator />
       </div>
     </div>
   );

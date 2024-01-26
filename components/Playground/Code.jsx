@@ -1,3 +1,4 @@
+"use client";
 import { CodeBlock, CopyBlock, github } from "react-code-blocks";
 const Code = ({ code, heading }) => {
   return (

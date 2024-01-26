@@ -1,5 +1,8 @@
-import { ArrowRight, CaretRight } from "@phosphor-icons/react";
-import { CaretDown } from "@phosphor-icons/react/dist/ssr";
+import {
+  CaretDown,
+  ArrowRight,
+  CaretRight,
+} from "@phosphor-icons/react/dist/ssr";
 
 const Sidebar = () => {
   return (
